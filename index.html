@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+<title>NH MAC TT Tournament — Registration</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{-webkit-tap-highlight-color:rgba(0,0,0,0);box-sizing:border-box;margin:0;padding:0;}
+button,a,div,span,img,input,textarea,select,label{outline:none;-webkit-tap-highlight-color:transparent;}
+img{-webkit-user-drag:none;-webkit-touch-callout:none;user-select:none;}
+body{user-select:none;-webkit-user-select:none;font-family:'Rajdhani',sans-serif;background:#ffffff;color:#0a0a1a;overflow-x:hidden;}
+input,textarea{user-select:text;-webkit-user-select:text;}
+:focus{outline:none;}
+button,a,.card,.item{cursor:pointer;}
+:root{
+  --blue:#1a6fff;--blue-dark:#0d4fd4;--blue-light:#4d8fff;--blue-pale:#e8f0ff;
+  --black:#0a0a1a;--white:#ffffff;--gray:#f4f6fb;--gray2:#e8ecf5;
+  --text:#0a0a1a;--text2:#4a5280;--border:#d0d8f0;
+  --green:#00c853;--orange:#ff6b00;--red:#ff3b3b;
+}
+
+/* LOADER (kept identical to NH ESPORTS hub) */
+#loader{position:fixed;inset:0;background:#fff;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.loader-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(36px,10vw,72px);letter-spacing:-2px;display:flex;align-items:center;gap:4px;}
+.loader-logo .s-letter{display:inline-block;opacity:0;transform:translateY(20px) scale(0.8);animation:sReveal 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.1s forwards;}
+.loader-logo .p-letter{display:inline-block;opacity:0;transform:translateY(20px);animation:sReveal 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.35s forwards;}
+.loader-logo .era-text{display:inline-block;opacity:0;transform:translateX(10px);animation:fadeSlide 0.6s ease 0.8s forwards;color:var(--blue);margin-left:8px;font-size:0.45em;letter-spacing:4px;}
+.loader-bar{width:180px;height:2px;background:var(--gray2);margin-top:24px;border-radius:2px;overflow:hidden;}
+.loader-bar-fill{height:100%;width:0;background:var(--blue);border-radius:2px;animation:barFill 1.4s ease 0.3s forwards;}
+@keyframes sReveal{0%{opacity:0;transform:translateY(20px) scale(0.8);}60%{opacity:1;transform:translateY(-4px) scale(1.05);}100%{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes fadeSlide{from{opacity:0;transform:translateX(10px);}to{opacity:1;transform:translateX(0);}}
+@keyframes barFill{from{width:0;}to{width:100%;}}
+
+/* NAVBAR */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1.5px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:16px;letter-spacing:1px;color:var(--black);text-decoration:none;display:flex;align-items:center;gap:2px;}
+.nav-logo .era{color:var(--blue);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.logout-btn{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;padding:7px 14px;border:1.5px solid var(--black);background:transparent;color:var(--black);border-radius:4px;letter-spacing:1px;transition:all 0.2s;display:none;}
+.logout-btn:hover{background:var(--black);color:#fff;}
+.menu-btn{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;}
+.user-avatar{width:30px;height:30px;border-radius:50%;background:var(--blue);display:none;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;font-family:'Orbitron',sans-serif;}
+
+/* SIDEBAR */
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.25s;}
+.sidebar-overlay.open{opacity:1;pointer-events:all;}
+.sidebar{position:fixed;right:0;top:0;bottom:0;width:280px;background:#fff;border-left:1.5px solid var(--border);z-index:201;transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;padding:24px 20px;}
+.sidebar.open{transform:translateX(0);}
+.sidebar-close{width:36px;height:36px;background:none;border:none;display:flex;align-items:center;justify-content:center;margin-bottom:32px;cursor:pointer;}
+.sidebar-link{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--gray2);font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--black);text-decoration:none;transition:color 0.2s;}
+.sidebar-link:hover{color:var(--blue);}
+.sidebar-link svg{flex-shrink:0;}
+
+/* HERO */
+.hero{position:relative;min-height:42vw;max-height:280px;overflow:hidden;background:#0a0a1a;display:flex;align-items:flex-end;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,26,0.2) 0%,rgba(10,10,26,0.85) 100%);}
+.hero-content{position:relative;z-index:1;padding:24px 20px;width:100%;}
+.hero-tag{display:inline-flex;align-items:center;background:var(--blue);color:#fff;font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;padding:4px 10px;border-radius:2px;margin-bottom:10px;}
+.hero-title{font-family:'Orbitron',sans-serif;font-size:clamp(22px,6vw,38px);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-0.5px;}
+.hero-title span{color:var(--blue);}
+.hero-sub{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:4px;color:rgba(255,255,255,0.5);margin-top:6px;text-transform:uppercase;}
+
+/* SECTION */
+.section{padding:20px 16px;max-width:560px;margin:0 auto;}
+.section-title{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--text2);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* VIEW TRANSITIONS */
+.view{display:none;}
+.view.active{display:block;animation:viewIn 0.5s cubic-bezier(.16,1,.3,1) both;}
+@keyframes viewIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+/* DISCLAIMER CARD */
+.panel-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:24px;}
+.disclaimer-icon{margin-bottom:14px;}
+.panel-title{font-family:'Orbitron',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;color:var(--black);margin-bottom:10px;}
+.panel-text{font-size:14px;color:var(--text2);line-height:1.6;}
+.panel-text b{color:var(--black);}
+.primary-btn{width:100%;background:var(--blue);color:#fff;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;padding:14px;border:none;border-radius:8px;transition:background 0.2s,transform 0.1s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;}
+.primary-btn:hover{background:var(--blue-dark);}
+.primary-btn:active{transform:scale(0.98);}
+.primary-btn:disabled{background:var(--gray2);color:var(--text2);pointer-events:none;}
+
+/* LOGIN SHEET (bottom sheet reused as inline card for login view) */
+.google-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:12px;background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:14px;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--black);transition:all 0.2s;margin-top:18px;}
+.google-btn:hover{border-color:var(--blue);background:var(--blue-pale);}
+.sheet-note{text-align:center;font-size:11px;color:var(--text2);opacity:0.6;margin-top:14px;}
+
+/* FORM */
+.field{margin-bottom:18px;}
+.field-label{display:block;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--text2);text-transform:uppercase;margin-bottom:8px;}
+.field-label .req{color:var(--red);}
+.field-input{width:100%;background:var(--gray);border:1.5px solid var(--border);border-radius:8px;padding:13px 14px;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;color:var(--black);transition:border-color 0.2s,background 0.2s;}
+.field-input:focus{border-color:var(--blue);background:#fff;}
+.field-hint{font-size:11px;color:var(--text2);opacity:0.7;margin-top:6px;}
+.field-error{font-size:11px;color:var(--red);margin-top:6px;display:none;}
+.field-error.show{display:block;}
+
+/* UPLOAD BUTTON (opens modal) */
+.upload-trigger{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--gray);border:1.5px dashed var(--border);border-radius:10px;padding:16px;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--text2);transition:all 0.2s;}
+.upload-trigger:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pale);}
+.upload-trigger.uploaded{background:rgba(0,200,83,0.1);border:1.5px solid rgba(0,200,83,0.4);color:var(--green);}
+.upload-trigger svg{flex-shrink:0;}
+
+/* shimmer thumbnail next to uploaded button */
+.upload-thumb-row{display:none;align-items:center;gap:12px;margin-top:12px;}
+.upload-thumb-row.show{display:flex;}
+.upload-thumb{width:56px;height:56px;border-radius:14px;overflow:hidden;position:relative;flex-shrink:0;background:var(--gray2);}
+.upload-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.shimmer{position:absolute;inset:0;background:linear-gradient(100deg,#e8ecf5 30%,#f6f8fc 50%,#e8ecf5 70%);background-size:200% 100%;animation:shimmerMove 1.4s ease-in-out infinite;border-radius:14px;}
+@keyframes shimmerMove{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+.upload-meta{flex:1;}
+.upload-meta-title{font-size:13px;font-weight:700;color:var(--black);}
+.upload-meta-sub{font-size:11px;color:var(--text2);}
+.upload-remove{font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;color:var(--red);background:none;border:none;margin-top:2px;text-decoration:underline;}
+
+/* MODAL (upload sheet) */
+.modal-overlay{position:fixed;inset:0;background:rgba(10,10,26,0.55);z-index:300;opacity:0;pointer-events:none;transition:opacity 0.25s;display:flex;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-box{background:#fff;border-radius:18px;width:100%;max-width:420px;max-height:88vh;overflow-y:auto;transform:translateY(24px) scale(0.97);opacity:0;transition:transform 0.3s cubic-bezier(0.4,0,0.2,1),opacity 0.3s;}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1);opacity:1;}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 20px 0;}
+.modal-title{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;color:var(--black);}
+.modal-close-btn{width:30px;height:30px;border-radius:50%;background:var(--gray);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.modal-body{padding:16px 20px 24px;}
+
+.example-frame{border-radius:14px;overflow:hidden;border:1.5px solid var(--border);margin-bottom:8px;position:relative;background:var(--gray2);aspect-ratio:16/10;}
+.example-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+.example-caption{font-size:11px;color:var(--text2);text-align:center;margin-bottom:18px;letter-spacing:0.5px;}
+
+.dropzone{border:2px dashed var(--border);border-radius:14px;padding:26px 16px;text-align:center;transition:all 0.2s;background:var(--gray);cursor:pointer;position:relative;overflow:hidden;}
+.dropzone.dragover{border-color:var(--blue);background:var(--blue-pale);}
+.dropzone svg{margin-bottom:10px;}
+.dropzone-title{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--black);margin-bottom:4px;}
+.dropzone-sub{font-size:12px;color:var(--text2);}
+
+.dropzone-preview{display:none;border-radius:14px;overflow:hidden;position:relative;aspect-ratio:16/10;background:var(--gray2);margin-top:4px;}
+.dropzone-preview.show{display:block;}
+.dropzone-preview img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1;}
+.dropzone-preview .shimmer{z-index:2;}
+.dropzone-preview .shimmer.hide{display:none;}
+
+.modal-save-btn{width:100%;background:var(--blue);color:#fff;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;padding:14px;border:none;border-radius:10px;margin-top:18px;text-transform:uppercase;transition:background 0.2s,transform 0.1s;}
+.modal-save-btn:hover{background:var(--blue-dark);}
+.modal-save-btn:active{transform:scale(0.98);}
+.modal-save-btn:disabled{background:var(--gray2);color:var(--text2);pointer-events:none;}
+
+/* STATUS VIEW */
+.status-icon-wrap{display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.status-badge{display:inline-flex;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;padding:7px 16px;border-radius:20px;text-transform:uppercase;}
+.status-pending{background:rgba(255,107,0,0.1);color:var(--orange);border:1.5px solid rgba(255,107,0,0.35);}
+.status-confirmed{background:rgba(0,200,83,0.1);color:var(--green);border:1.5px solid rgba(0,200,83,0.35);}
+.status-rejected{background:rgba(255,59,59,0.1);color:var(--red);border:1.5px solid rgba(255,59,59,0.35);}
+.summary-box{background:var(--gray);border-radius:10px;padding:14px 16px;margin-top:18px;font-size:13px;}
+.summary-row{display:flex;justify-content:space-between;padding:5px 0;color:var(--text2);}
+.summary-row b{color:var(--black);}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--black);color:#fff;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;padding:12px 20px;border-radius:8px;z-index:999;opacity:0;transition:all 0.3s;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@keyframes spin{to{transform:rotate(360deg);}}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">
+    <span class="s-letter" style="color:#1a6fff;">N</span>
+    <span class="p-letter">H</span>
+    <span class="era-text">ESPORTS</span>
+  </div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <button class="sidebar-close" onclick="closeSidebar()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <a href="index.html" class="sidebar-link">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+    TOURNAMENT HUB
+  </a>
+  <a href="#" id="rules-link" class="sidebar-link">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    TOURNAMENT RULES
+  </a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">NH <span class="era">ESPORTS</span></a>
+  <div class="nav-right">
+    <div class="user-avatar" id="user-avatar"></div>
+    <button class="logout-btn" id="logout-btn" onclick="doLogout()">LOGOUT</button>
+    <button class="menu-btn" onclick="openSidebar()">
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+        <rect width="22" height="2.5" rx="1.25" fill="#0a0a1a"/>
+        <rect y="6.75" width="16" height="2.5" rx="1.25" fill="#0a0a1a"/>
+        <rect y="13.5" width="10" height="2.5" rx="1.25" fill="#1a6fff"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-overlay"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0a1a 0%,#0d1a40 50%,#050510 100%);">
+    <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(26,111,255,0.04) 40px,rgba(26,111,255,0.04) 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(26,111,255,0.04) 40px,rgba(26,111,255,0.04) 41px);"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag">MAC RULESET · 4v4 CS</div>
+    <div class="hero-title">GUILD LEADER <span>REGISTRATION</span></div>
+    <div class="hero-sub">NH MAC TT TOURNAMENT</div>
+  </div>
+</div>
+
+<!-- ============== DISCLAIMER VIEW ============== -->
+<div class="section view" id="view-disclaimer">
+  <div class="panel-card">
+    <div class="disclaimer-icon">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1a6fff" stroke-width="1.6"><path d="M12 2l9 4v6c0 5-4 8.5-9 10-5-1.5-9-5-9-10V6l9-4z"/><path d="M12 8v5M12 16h.01" stroke-linecap="round" stroke-width="2"/></svg>
+    </div>
+    <div class="panel-title">OFFICIAL DISCLAIMER</div>
+    <div class="panel-text">
+      This registration is exclusively for Free Fire guild leaders entering the <b>NH MAC TT Tournament</b> under the official <b>4v4 Clash Squad — MAC ruleset</b>. By continuing, you confirm your details are accurate, that you hold leadership of the guild listed, and that you agree to abide by tournament rules and the organizers' decisions. Misrepresentation may lead to disqualification.
+    </div>
+    <button class="primary-btn" id="disclaimer-continue">I UNDERSTAND &amp; CONTINUE</button>
+  </div>
+</div>
+
+<!-- ============== LOGIN VIEW ============== -->
+<div class="section view" id="view-login">
+  <div class="panel-card">
+    <div class="panel-title">JOIN THE BATTLE</div>
+    <div class="panel-text">Sign in with Google to register your squad's leader for this tournament.</div>
+    <button class="google-btn" onclick="googleLogin()">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      CONTINUE WITH GOOGLE
+    </button>
+    <div class="sheet-note">Your data is secure and only used for registration.</div>
+  </div>
+</div>
+
+<!-- ============== FORM VIEW ============== -->
+<div class="section view" id="view-form">
+  <div class="section-title">REGISTER YOUR TEAM</div>
+  <div class="panel-card">
+    <form id="reg-form">
+      <div class="field">
+        <label class="field-label">LEADER GAME NAME (IGN) <span class="req">*</span></label>
+        <input class="field-input" id="f-ign" type="text" maxlength="24" placeholder="e.g. NH_Phantom" required/>
+      </div>
+
+      <div class="field">
+        <label class="field-label">GUILD NAME <span class="req">*</span></label>
+        <input class="field-input" id="f-guild" type="text" maxlength="30" placeholder="e.g. NOT HUMANS" required/>
+      </div>
+
+      <div class="field">
+        <label class="field-label">LEADER WHATSAPP NUMBER <span class="req">*</span></label>
+        <input class="field-input" id="f-whatsapp" type="tel" placeholder="+91 98765 43210" required/>
+        <div class="field-hint">Include your country code, e.g. +91 for India.</div>
+        <div class="field-error" id="err-whatsapp">Enter a valid number with country code (e.g. +919876543210).</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">LEADER AGE <span class="req">*</span></label>
+        <input class="field-input" id="f-age" type="number" min="10" max="60" placeholder="e.g. 19" required/>
+        <div class="field-error" id="err-age">Age must be between 10 and 60.</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">PROOF SCREENSHOT (GUILD LEADER VERIFICATION) <span class="req">*</span></label>
+        <button type="button" class="upload-trigger" id="upload-trigger">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+          <span id="upload-trigger-text">UPLOAD SCREENSHOT</span>
+        </button>
+
+        <div class="upload-thumb-row" id="upload-thumb-row">
+          <div class="upload-thumb">
+            <div class="shimmer" id="thumb-shimmer"></div>
+            <img id="thumb-img" style="display:none;"/>
+          </div>
+          <div class="upload-meta">
+            <div class="upload-meta-title">Screenshot ready</div>
+            <div class="upload-meta-sub" id="thumb-status">Uploading…</div>
+            <button type="button" class="upload-remove" id="upload-remove">REMOVE</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="primary-btn" type="submit" id="submit-btn" disabled>SUBMIT REGISTRATION</button>
+      <div class="field-error" id="form-error" style="text-align:center;margin-top:12px;"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ============== STATUS VIEW ============== -->
+<div class="section view" id="view-status">
+  <div class="panel-card" style="text-align:center;">
+    <div class="status-icon-wrap" id="status-icon-wrap">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#ff6b00" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="#ff6b00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="panel-title">REGISTRATION RECEIVED</div>
+    <div class="panel-text">Your guild has been entered into the review queue. The committee will verify your details shortly.</div>
+    <div style="margin-top:16px;"><span class="status-badge status-pending" id="status-badge">PENDING</span></div>
+    <div class="summary-box" id="status-summary"></div>
+  </div>
+</div>
+
+<!-- ============== RULES MODAL ============== -->
+<div class="modal-overlay" id="rules-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">TOURNAMENT RULES</div>
+      <button class="modal-close-btn" onclick="closeModal('rules-modal')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div id="rules-content" style="font-size:13px;color:var(--text2);line-height:1.7;white-space:pre-line;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============== UPLOAD MODAL (example + dropzone + save) ============== -->
+<div class="modal-overlay" id="upload-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">UPLOAD PROOF SCREENSHOT</div>
+      <button class="modal-close-btn" onclick="closeModal('upload-modal')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <!-- Example reference image, pulled from local /assets folder -->
+      <div class="example-frame">
+        <img src="example.png" alt="Example guild screenshot"/>
+      </div>
+      <div class="example-caption">EXAMPLE — capture your name, guild name &amp; leader badge clearly</div>
+
+      <div class="dropzone" id="dropzone">
+        <input type="file" accept="image/*" id="file-input" style="display:none;"/>
+        <div id="dropzone-empty">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1a6fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <div class="dropzone-title">DRAG &amp; DROP OR TAP TO BROWSE</div>
+          <div class="dropzone-sub">PNG or JPG, your guild screen only</div>
+        </div>
+        <div class="dropzone-preview" id="dropzone-preview">
+          <div class="shimmer" id="preview-shimmer"></div>
+          <img id="preview-img"/>
+        </div>
+      </div>
+
+      <button class="modal-save-btn" id="modal-save-btn" disabled>SAVE SCREENSHOT</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import{initializeApp}from'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+import{getAuth,signInWithPopup,GoogleAuthProvider,onAuthStateChanged,signOut}from'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
+import{getFirestore,collection,addDoc,query,where,getDocs,doc,onSnapshot,serverTimestamp}from'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+
+/* ===========================================================================
+   FIREBASE SETUP — replace with your project's config if needed
+=========================================================================== */
+const firebaseConfig = {
+  apiKey: "AIzaSyBoeQkpZiFQ5_2nbB-5NlTMmqN2Gx38ano",
+  authDomain: "nh-reg.firebaseapp.com",
+  projectId: "nh-reg",
+  storageBucket: "nh-reg.firebasestorage.app",
+  messagingSenderId: "443278604751",
+  appId: "1:443278604751:web:5afff08f3ac95f9fc2faba"
+};
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const provider=new GoogleAuthProvider();
+
+/* imgbb — converts uploaded screenshots into public URLs */
+const IMGBB_API_KEY="405018efab5e2bd5e75f4dd0040a41c3";
+const IMGBB_UPLOAD_URL=`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`;
+
+let currentUser=null;
+let currentLeaderDoc=null;
+let uploadedImageUrl=null;
+let pendingFile=null;
+let leaderUnsub=null;
+
+/* ---------------- view switching ---------------- */
+const VIEWS=['view-disclaimer','view-login','view-form','view-status'];
+function showView(id){
+  VIEWS.forEach(v=>{
+    const el=document.getElementById(v);
+    el.classList.toggle('active', v===id);
+  });
+}
+
+/* ---------------- modal helpers ---------------- */
+window.openModal=(id)=>document.getElementById(id).classList.add('open');
+window.closeModal=(id)=>document.getElementById(id).classList.remove('open');
+
+/* ---------------- toast ---------------- */
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+/* ---------------- loader ---------------- */
+setTimeout(()=>{
+  const l=document.getElementById('loader');
+  l.style.transition='opacity 0.5s';l.style.opacity='0';
+  setTimeout(()=>{l.style.display='none';showView('view-disclaimer');},500);
+},2000);
+
+/* ---------------- sidebar ---------------- */
+window.openSidebar=()=>{document.getElementById('sidebar-overlay').classList.add('open');document.getElementById('sidebar').classList.add('open');};
+window.closeSidebar=()=>{document.getElementById('sidebar-overlay').classList.remove('open');document.getElementById('sidebar').classList.remove('open');};
+
+/* ---------------- disclaimer ---------------- */
+document.getElementById('disclaimer-continue').addEventListener('click', routeAfterDisclaimer);
+let disclaimerAutoTimer=setTimeout(()=>{
+  if(document.getElementById('view-disclaimer').classList.contains('active')) routeAfterDisclaimer();
+},9000);
+
+async function routeAfterDisclaimer(){
+  clearTimeout(disclaimerAutoTimer);
+  if(!currentUser){ showView('view-login'); return; }
+  await routeLoggedInUser();
+}
+
+/* ---------------- auth ---------------- */
+onAuthStateChanged(auth, async user=>{
+  currentUser=user;
+  const lb=document.getElementById('logout-btn');
+  const av=document.getElementById('user-avatar');
+  if(user){
+    lb.style.display='block';av.style.display='flex';
+    av.textContent=user.displayName?user.displayName[0].toUpperCase():'U';
+  }else{
+    lb.style.display='none';av.style.display='none';
+  }
+  // only auto-route once the disclaimer has been passed
+  if(!document.getElementById('view-disclaimer').classList.contains('active') && document.getElementById('loader').style.display==='none'){
+    await routeLoggedInUser();
+  }
+});
+
+async function routeLoggedInUser(){
+  if(!currentUser){ showView('view-login'); return; }
+  try{
+    const snap=await getDocs(query(collection(db,'leaders'), where('uid','==',currentUser.uid)));
+    if(!snap.empty){
+      const d=snap.docs[0];
+      currentLeaderDoc={id:d.id, ...d.data()};
+      renderStatus(currentLeaderDoc);
+      listenLeader(d.id);
+      showView('view-status');
+    }else{
+      showView('view-form');
+    }
+  }catch(e){ console.warn(e); showView('view-form'); }
+}
+
+function listenLeader(id){
+  if(leaderUnsub) leaderUnsub();
+  leaderUnsub=onSnapshot(doc(db,'leaders',id), d=>{
+    if(!d.exists()) return;
+    currentLeaderDoc={id:d.id, ...d.data()};
+    if(document.getElementById('view-status').classList.contains('active')) renderStatus(currentLeaderDoc);
+  });
+}
+
+function renderStatus(leader){
+  const badge=document.getElementById('status-badge');
+  badge.textContent=leader.status.toUpperCase();
+  badge.className=`status-badge status-${leader.status}`;
+
+  const iconWrap=document.getElementById('status-icon-wrap');
+  if(leader.status==='confirmed'){
+    iconWrap.innerHTML=`<svg width="52" height="52" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#00c853" stroke-width="1.6"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#00c853" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  }else if(leader.status==='rejected'){
+    iconWrap.innerHTML=`<svg width="52" height="52" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#ff3b3b" stroke-width="1.6"/><path d="M9 9l6 6M15 9l-6 6" stroke="#ff3b3b" stroke-width="1.8" stroke-linecap="round"/></svg>`;
+  }else{
+    iconWrap.innerHTML=`<svg width="52" height="52" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#ff6b00" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="#ff6b00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  }
+
+  document.getElementById('status-summary').innerHTML=`
+    <div class="summary-row"><span>IGN</span><b>${escapeHtml(leader.ign)}</b></div>
+    <div class="summary-row"><span>Guild</span><b>${escapeHtml(leader.guildName)}</b></div>
+    <div class="summary-row"><span>WhatsApp</span><b>${escapeHtml(leader.whatsapp)}</b></div>
+  `;
+}
+
+window.googleLogin=async()=>{
+  try{ await signInWithPopup(auth, provider); }
+  catch(e){ showToast('LOGIN FAILED — TRY AGAIN'); }
+};
+window.doLogout=async()=>{ await signOut(auth); showToast('LOGGED OUT'); showView('view-login'); };
+
+/* ---------------- rules ---------------- */
+document.getElementById('rules-link').addEventListener('click', e=>{
+  e.preventDefault(); closeSidebar(); openModal('rules-modal');
+});
+onSnapshot(doc(db,'config','rules'), d=>{
+  document.getElementById('rules-content').textContent = d.exists()? d.data().text : 'Rules have not been published yet. Check back soon.';
+});
+
+/* ===========================================================================
+   FORM VALIDATION
+=========================================================================== */
+const fIgn=document.getElementById('f-ign');
+const fGuild=document.getElementById('f-guild');
+const fWhatsapp=document.getElementById('f-whatsapp');
+const fAge=document.getElementById('f-age');
+const submitBtn=document.getElementById('submit-btn');
+
+function validWhatsapp(v){ return /^\+[1-9]\d{7,14}$/.test(v.replace(/[\s-]/g,'')); }
+function validAge(v){ const n=Number(v); return Number.isInteger(n)&&n>=10&&n<=60; }
+
+function refreshSubmit(){
+  const ok = fIgn.value.trim() && fGuild.value.trim() &&
+    validWhatsapp(fWhatsapp.value.trim()) && validAge(fAge.value) && !!uploadedImageUrl;
+  submitBtn.disabled=!ok;
+}
+[fIgn,fGuild].forEach(el=>el.addEventListener('input',refreshSubmit));
+fWhatsapp.addEventListener('input',()=>{
+  document.getElementById('err-whatsapp').classList.toggle('show', fWhatsapp.value.trim()!=='' && !validWhatsapp(fWhatsapp.value.trim()));
+  refreshSubmit();
+});
+fAge.addEventListener('input',()=>{
+  document.getElementById('err-age').classList.toggle('show', fAge.value!=='' && !validAge(fAge.value));
+  refreshSubmit();
+});
+
+/* ===========================================================================
+   UPLOAD MODAL — example image + dropzone + save
+=========================================================================== */
+const dropzone=document.getElementById('dropzone');
+const fileInput=document.getElementById('file-input');
+const dzEmpty=document.getElementById('dropzone-empty');
+const dzPreview=document.getElementById('dropzone-preview');
+const previewImg=document.getElementById('preview-img');
+const previewShimmer=document.getElementById('preview-shimmer');
+const saveBtn=document.getElementById('modal-save-btn');
+
+document.getElementById('upload-trigger').addEventListener('click', ()=>{
+  openModal('upload-modal');
+});
+
+dropzone.addEventListener('click', ()=>fileInput.click());
+dropzone.addEventListener('dragover', e=>{ e.preventDefault(); dropzone.classList.add('dragover'); });
+dropzone.addEventListener('dragleave', ()=> dropzone.classList.remove('dragover'));
+dropzone.addEventListener('drop', e=>{
+  e.preventDefault(); dropzone.classList.remove('dragover');
+  if(e.dataTransfer.files[0]) handleFilePicked(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', e=>{
+  if(e.target.files[0]) handleFilePicked(e.target.files[0]);
+});
+
+function handleFilePicked(file){
+  pendingFile=file;
+  dzEmpty.style.display='none';
+  dzPreview.classList.add('show');
+  previewShimmer.classList.remove('hide');
+  previewImg.style.opacity='0';
+
+  const reader=new FileReader();
+  reader.onload=()=>{
+    previewImg.src=reader.result;
+    previewImg.onload=()=>{
+      previewShimmer.classList.add('hide');
+      previewImg.style.transition='opacity .25s';
+      previewImg.style.opacity='1';
+    };
+  };
+  reader.readAsDataURL(file);
+  saveBtn.disabled=false;
+}
+
+saveBtn.addEventListener('click', async ()=>{
+  if(!pendingFile) return;
+  saveBtn.disabled=true;
+  saveBtn.textContent='UPLOADING…';
+
+  try{
+    const base64=await fileToBase64(pendingFile);
+    const form=new FormData();
+    form.append('image', base64);
+    const res=await fetch(IMGBB_UPLOAD_URL,{method:'POST',body:form});
+    const json=await res.json();
+    if(!json.success) throw new Error('upload failed');
+    uploadedImageUrl=json.data.url;
+
+    // reflect on the main form trigger button + thumbnail
+    const trigger=document.getElementById('upload-trigger');
+    trigger.classList.add('uploaded');
+    document.getElementById('upload-trigger-text').textContent='UPLOADED';
+    trigger.querySelector('svg').outerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+
+    const thumbRow=document.getElementById('upload-thumb-row');
+    thumbRow.classList.add('show');
+    document.getElementById('thumb-shimmer').classList.remove('hide');
+    const thumbImg=document.getElementById('thumb-img');
+    thumbImg.style.display='none';
+    thumbImg.onload=()=>{
+      document.getElementById('thumb-shimmer').style.display='none';
+      thumbImg.style.display='block';
+    };
+    thumbImg.src=uploadedImageUrl;
+    document.getElementById('thumb-status').textContent='Uploaded ✓';
+
+    refreshSubmit();
+    closeModal('upload-modal');
+    showToast('SCREENSHOT SAVED');
+  }catch(e){
+    console.error(e);
+    showToast('UPLOAD FAILED — TRY AGAIN');
+  }finally{
+    saveBtn.textContent='SAVE SCREENSHOT';
+    saveBtn.disabled = !pendingFile ? true : false;
+  }
+});
+
+document.getElementById('upload-remove').addEventListener('click', ()=>{
+  uploadedImageUrl=null; pendingFile=null;
+  document.getElementById('upload-thumb-row').classList.remove('show');
+  const trigger=document.getElementById('upload-trigger');
+  trigger.classList.remove('uploaded');
+  document.getElementById('upload-trigger-text').textContent='UPLOAD SCREENSHOT';
+  trigger.querySelector('svg').outerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>';
+  dzEmpty.style.display='block';
+  dzPreview.classList.remove('show');
+  saveBtn.disabled=true;
+  refreshSubmit();
+});
+
+function fileToBase64(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=()=>resolve(r.result.split(',')[1]);
+    r.onerror=reject;
+    r.readAsDataURL(file);
+  });
+}
+
+/* ===========================================================================
+   SUBMIT REGISTRATION
+=========================================================================== */
+document.getElementById('reg-form').addEventListener('submit', async e=>{
+  e.preventDefault();
+  if(submitBtn.disabled || !currentUser) return;
+  const errEl=document.getElementById('form-error');
+  errEl.textContent='';
+  submitBtn.disabled=true; submitBtn.textContent='SUBMITTING…';
+
+  const payload={
+    ign:fIgn.value.trim(),
+    guildName:fGuild.value.trim(),
+    whatsapp:fWhatsapp.value.trim(),
+    age:Number(fAge.value),
+    imageUrl:uploadedImageUrl,
+    status:'pending',
+    uid:currentUser.uid,
+    email:currentUser.email||null,
+    createdAt:serverTimestamp()
+  };
+
+  try{
+    const ref=await addDoc(collection(db,'leaders'), payload);
+    currentLeaderDoc={id:ref.id, ...payload, status:'pending'};
+    listenLeader(ref.id);
+    renderStatus(currentLeaderDoc);
+    showView('view-status');
+    showToast('REGISTRATION SUBMITTED');
+  }catch(err){
+    console.error(err);
+    errEl.textContent='Something went wrong submitting your registration. Please try again.';
+    showToast('SUBMISSION FAILED');
+  }finally{
+    submitBtn.textContent='SUBMIT REGISTRATION';
+    refreshSubmit();
+  }
+});
+
+function escapeHtml(str){
+  return String(str??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+</script>
+</body>
+</html>
