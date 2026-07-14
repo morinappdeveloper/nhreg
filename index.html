@@ -492,24 +492,17 @@ let currentUser = null;
 
 /* QUESTION POOL - Based ONLY on official NH MAC rules */
 const questionPool = [
-  { id: 1, question: "How many teams participate in NH MAC tournaments?", options: ["20", "24", "28", "32"], correctIndex: 1 },
-  { id: 2, question: "How many league matches does each team play?", options: ["2", "3", "4", "5"], correctIndex: 1 },
-  { id: 3, question: "How many points does a team get for a win?", options: ["1 Point", "2 Points", "3 Points", "0 Points"], correctIndex: 1 },
-  { id: 4, question: "How many teams qualify for Quarter Final 1?", options: ["8", "10", "12", "16"], correctIndex: 2 },
-  { id: 5, question: "What is used as the tie-breaker?", options: ["Total Points", "Round Difference", "Total Kills", "Head to Head"], correctIndex: 1 },
-  { id: 6, question: "How many minutes before the match must teams report?", options: ["5 Minutes", "10 Minutes", "15 Minutes", "30 Minutes"], correctIndex: 1 },
-  { id: 7, question: "What happens if a team reports late or does not show?", options: ["Warning", "Restart Match", "Walkover (6-0)", "Nothing"], correctIndex: 2 },
-  { id: 8, question: "How many Gloo Walls are allowed?", options: ["Not Allowed", "Limited to 5", "Unlimited Allowed", "Only in Final"], correctIndex: 2 },
-  { id: 9, question: "Is Revive ON or OFF in NH MAC?", options: ["ON", "OFF"], correctIndex: 1 },
-  { id: 10, question: "How many UMPs are allowed per team?", options: ["1", "2", "Unlimited", "None"], correctIndex: 0 },
-  { id: 11, question: "Is the roof allowed during matches?", options: ["Yes", "No"], correctIndex: 1 },
-  { id: 12, question: "What is the maximum wall height allowed on Container & Observatory?", options: ["One Wall", "Two Walls", "Three Walls", "Unlimited"], correctIndex: 1 },
-  { id: 13, question: "Is match recording compulsory?", options: ["Optional", "Mandatory"], correctIndex: 1 },
-  { id: 14, question: "Within how many minutes after a match can phone check be requested?", options: ["5 Minutes", "10 Minutes", "15 Minutes", "30 Minutes"], correctIndex: 2 },
-  { id: 15, question: "Is VPN allowed in NH MAC?", options: ["Yes, Allowed", "Strictly Prohibited"], correctIndex: 1 },
-  { id: 16, question: "What happens if any hack, config, script or third-party tool is used?", options: ["Warning", "Points Deducted", "Direct Team Disqualification", "Retry Allowed"], correctIndex: 2 },
-  { id: 17, question: "What happens if recording is not submitted within 15 minutes?", options: ["Warning", "Team Disqualification", "Restart Match", "Nothing"], correctIndex: 1 },
-  { id: 18, question: "Is the Organizer's decision final and binding?", options: ["Can be appealed", "Final & Binding"], correctIndex: 1 }
+  { id: 1, question: "How many Gloo Walls are allowed?", options: ["Not Allowed", "Limited to 5", "Unlimited Allowed", "Only in Final"], correctIndex: 2 },
+  { id: 2, question: "Is Revive ON or OFF in NH MAC?", options: ["ON", "OFF"], correctIndex: 1 },
+  { id: 3, question: "How many UMPs are allowed per team?", options: ["1", "2", "Unlimited", "None"], correctIndex: 0 },
+  { id: 4, question: "Is the roof allowed during matches?", options: ["Yes", "No"], correctIndex: 1 },
+  { id: 5, question: "What is the maximum wall height allowed on Container & Observatory?", options: ["One Wall", "Two Walls", "Three Walls", "Unlimited"], correctIndex: 1 },
+  { id: 6, question: "Is match recording compulsory?", options: ["Optional", "Mandatory"], correctIndex: 1 },
+  { id: 7, question: "Within how many minutes after a match can phone check be requested?", options: ["5 Minutes", "10 Minutes", "15 Minutes", "30 Minutes"], correctIndex: 2 },
+  { id: 8, question: "Is VPN allowed in NH MAC?", options: ["Yes, Allowed", "Strictly Prohibited"], correctIndex: 1 },
+  { id: 9, question: "What happens if any hack, config, script or third-party tool is used?", options: ["Warning", "Points Deducted", "Direct Team Disqualification", "Retry Allowed"], correctIndex: 2 },
+  { id: 10, question: "What happens if recording is not submitted within 15 minutes?", options: ["Warning", "Team Disqualification", "Restart Match", "Nothing"], correctIndex: 1 },
+  { id: 11, question: "Is the Organizer's decision final and binding?", options: ["Can be appealed", "Final & Binding"], correctIndex: 1 }
 ];
 
 function getRandomQuestions(count) {
