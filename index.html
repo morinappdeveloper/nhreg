@@ -3,90 +3,46 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
-<title>NOT HUMANS ESPORTS — Caster Registration</title>
+<title>NH ESPORTS — Guild Leader Verification</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *{-webkit-tap-highlight-color:rgba(0,0,0,0);box-sizing:border-box;margin:0;padding:0;}
 button,a,div,span,input,textarea,select,label{outline:none;-webkit-tap-highlight-color:transparent;}
 img{-webkit-user-drag:none;-webkit-touch-callout:none;user-select:none;}
-body{user-select:none;-webkit-user-select:none;font-family:'Rajdhani',sans-serif;background:#f8f5eb;color:#0a0a1a;overflow-x:hidden;}
+body{user-select:none;-webkit-user-select:none;font-family:'Rajdhani',sans-serif;background:#ffffff;color:#0a0a1a;overflow-x:hidden;}
 input,textarea{user-select:text;-webkit-user-select:text;}
 :focus{outline:none;}
 button,a,.card,.item{cursor:pointer;}
-
-/* YELLOW/GOLD THEME */
 :root{
-  --gold:#ffd700;
-  --gold-dark:#c5a000;
-  --gold-light:#fff8e1;
-  --gold-pale:#fff3cd;
-  --black:#0a0a1a;
-  --white:#ffffff;
-  --gray:#f8f5eb;
-  --gray2:#f0e9d8;
-  --text:#0a0a1a;
-  --text2:#6b5e3d;
-  --border:#d4c8a0;
-  --green:#00c853;
-  --orange:#ff6b00;
-  --red:#ff3b3b;
+  --blue:#1a6fff;--blue-dark:#0d4fd4;--blue-light:#4d8fff;--blue-pale:#e8f0ff;
+  --black:#0a0a1a;--white:#ffffff;--gray:#f4f6fb;--gray2:#e8ecf5;
+  --text:#0a0a1a;--text2:#4a5280;--border:#d0d8f0;
+  --green:#00c853;--orange:#ff6b00;--red:#ff3b3b;
 }
 
-/* LOADER - Premium Fast Gold Intro (new improved version) */
-#loader{position:fixed;inset:0;background:#0a0a1a;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;}
-.loader-content{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;}
-.loader-logo-img{
-  width:168px;height:168px;object-fit:contain;
-  opacity:0;transform:scale(0.65);
-  filter:drop-shadow(0 8px 32px rgba(255,215,0,0.25));
-  animation:logoIntro 0.85s cubic-bezier(0.23,1.0,0.32,1) forwards;
-}
-@keyframes logoIntro{
-  0%{opacity:0;transform:scale(0.65);}
-  55%{opacity:1;transform:scale(1.08);}
-  75%{transform:scale(0.97);}
-  100%{opacity:1;transform:scale(1);}
-}
-
-.loader-text{
-  display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:6px;
-}
-.nh-text{
-  font-family:'Orbitron',sans-serif;font-weight:900;font-size:26px;letter-spacing:3.5px;color:#ffd700;
-  opacity:0;transform:translateY(12px);
-  animation:textReveal 0.6s cubic-bezier(0.23,1,0.32,1) 0.55s forwards;
-}
-.esports-text{
-  font-family:'Orbitron',sans-serif;font-weight:700;font-size:15px;letter-spacing:7px;color:#fff;
-  opacity:0;transform:translateY(8px);
-  animation:textReveal 0.5s cubic-bezier(0.23,1,0.32,1) 0.82s forwards;
-}
-@keyframes textReveal{
-  0%{opacity:0;transform:translateY(12px);}
-  60%{opacity:1;transform:translateY(-1px);}
-  100%{opacity:1;transform:translateY(0);}
-}
-
-.loader-sub{
-  font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:4px;color:rgba(255,255,255,0.35);
-  margin-top:2px;opacity:0;animation:fadeInSub 0.4s ease 1.15s forwards;
-}
-@keyframes fadeInSub{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
-
-.loader-bar{width:128px;height:1.5px;background:rgba(255,215,0,0.12);margin-top:22px;border-radius:2px;overflow:hidden;}
-.loader-bar-fill{height:100%;width:0;background:linear-gradient(to right,#ffd700,#fff3b0);border-radius:2px;animation:barFill 0.9s cubic-bezier(0.23,1,0.32,1) 0.35s forwards;}
+/* LOADER - EXACTLY PRESERVED */
+#loader{position:fixed;inset:0;background:#fff;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.loader-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(36px,10vw,72px);letter-spacing:-2px;display:flex;align-items:center;gap:4px;}
+.loader-logo .s-letter{display:inline-block;opacity:0;transform:translateY(20px) scale(0.8);animation:sReveal 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.1s forwards;}
+.loader-logo .p-letter{display:inline-block;opacity:0;transform:translateY(20px);animation:sReveal 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.35s forwards;}
+.loader-logo .era-text{display:inline-block;opacity:0;transform:translateX(10px);animation:fadeSlide 0.6s ease 0.8s forwards;color:var(--blue);margin-left:8px;font-size:0.45em;letter-spacing:4px;}
+.loader-bar{width:180px;height:2px;background:var(--gray2);margin-top:24px;border-radius:2px;overflow:hidden;}
+.loader-bar-fill{height:100%;width:0;background:var(--blue);border-radius:2px;animation:barFill 1.4s ease 0.3s forwards;}
+@keyframes sReveal{0%{opacity:0;transform:translateY(20px) scale(0.8);}60%{opacity:1;transform:translateY(-4px) scale(1.05);}100%{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes fadeSlide{from{opacity:0;transform:translateX(10px);}to{opacity:1;transform:translateX(0);}}
 @keyframes barFill{from{width:0;}to{width:100%;}}
 
 /* NAVBAR */
-nav{position:sticky;top:0;z-index:100;background:rgba(248,245,235,0.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1.5px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;}
-.nav-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:15px;letter-spacing:1px;color:var(--black);text-decoration:none;display:flex;align-items:center;gap:8px;}
-.nav-logo img{height:26px;width:auto;}
-.nav-logo .era{color:var(--gold-dark);}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1.5px solid var(--border);padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:16px;letter-spacing:1px;color:var(--black);text-decoration:none;display:flex;align-items:center;gap:2px;}
+.nav-logo .era{color:var(--blue);}
 .nav-right{display:flex;align-items:center;gap:10px;}
-.logout-btn{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;padding:7px 14px;border:1.5px solid var(--black);background:transparent;color:var(--black);border-radius:4px;letter-spacing:1px;transition:all 0.2s;display:none;}
-.logout-btn:hover{background:var(--black);color:#fff;}
 .menu-btn{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:none;border:none;cursor:pointer;}
-.user-avatar{width:30px;height:30px;border-radius:50%;background:var(--gold);display:none;align-items:center;justify-content:center;color:#0a0a1a;font-size:11px;font-weight:700;font-family:'Orbitron',sans-serif;}
+.user-chip{display:none;align-items:center;gap:8px;background:var(--gray);border:1.5px solid var(--border);border-radius:20px;padding:4px 10px 4px 4px;}
+.user-chip.show{display:flex;}
+.user-chip img{width:26px;height:26px;border-radius:50%;object-fit:cover;}
+.user-chip span{font-size:12px;font-weight:700;color:var(--black);max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.user-chip button{background:none;border:none;font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;color:var(--red);letter-spacing:1px;padding:0 2px;}
 
 /* SIDEBAR */
 .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.25s;}
@@ -95,55 +51,49 @@ nav{position:sticky;top:0;z-index:100;background:rgba(248,245,235,0.96);backdrop
 .sidebar.open{transform:translateX(0);}
 .sidebar-close{width:36px;height:36px;background:none;border:none;display:flex;align-items:center;justify-content:center;margin-bottom:32px;cursor:pointer;}
 .sidebar-link{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--gray2);font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--black);text-decoration:none;transition:color 0.2s;}
-.sidebar-link:hover{color:var(--gold-dark);}
+.sidebar-link:hover{color:var(--blue);}
 .sidebar-link svg{flex-shrink:0;}
 
 /* HERO */
 .hero{position:relative;min-height:42vw;max-height:280px;overflow:hidden;background:#0a0a1a;display:flex;align-items:flex-end;}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,26,0.15) 0%,rgba(10,10,26,0.88) 100%);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,26,0.2) 0%,rgba(10,10,26,0.85) 100%);}
 .hero-content{position:relative;z-index:1;padding:24px 20px;width:100%;}
-.hero-tag{display:inline-flex;align-items:center;background:var(--gold);color:#0a0a1a;font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;padding:4px 10px;border-radius:2px;margin-bottom:10px;}
+.hero-tag{display:inline-flex;align-items:center;background:var(--blue);color:#fff;font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;padding:4px 10px;border-radius:2px;margin-bottom:10px;}
 .hero-title{font-family:'Orbitron',sans-serif;font-size:clamp(22px,6vw,38px);font-weight:900;color:#fff;line-height:1.05;letter-spacing:-0.5px;}
-.hero-title span{color:var(--gold);}
+.hero-title span{color:var(--blue);}
 .hero-sub{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:4px;color:rgba(255,255,255,0.5);margin-top:6px;text-transform:uppercase;}
 
 /* SECTION */
 .section{padding:20px 16px;max-width:560px;margin:0 auto;}
+.section-title{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--text2);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border);}
 
-/* VIEW TRANSITIONS */
-.view{display:none;}
-.view.active{display:block;animation:viewIn 0.5s cubic-bezier(.16,1,.3,1) both;}
-@keyframes viewIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
-
-/* DISCLAIMER CARD */
+/* PANEL CARD */
 .panel-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:24px;}
-.disclaimer-icon{margin-bottom:14px;}
-.panel-title{font-family:'Orbitron',sans-serif;font-size:15px;font-weight:800;letter-spacing:1px;color:var(--black);margin-bottom:10px;}
-.panel-text{font-size:14px;color:var(--text2);line-height:1.6;}
-.panel-text b{color:var(--black);}
-.primary-btn{width:100%;background:var(--gold);color:#0a0a1a;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;padding:14px;border:none;border-radius:8px;transition:background 0.2s,transform 0.1s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;}
-.primary-btn:hover{background:var(--gold-dark);color:#fff;}
-.primary-btn:active{transform:scale(0.98);}
-.primary-btn:disabled{background:var(--gray2);color:var(--text2);pointer-events:none;}
 
-/* LOGIN */
-.google-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:12px;background:#fff;border:1.5px solid var(--border);border-radius:10px;padding:14px;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--black);transition:all 0.2s;margin-top:18px;}
-.google-btn:hover{border-color:var(--gold);background:var(--gold-pale);}
-.sheet-note{text-align:center;font-size:11px;color:var(--text2);opacity:0.6;margin-top:14px;}
+/* LOGIN GATE */
+#login-gate{position:fixed;inset:0;background:#fff;z-index:250;display:flex;align-items:center;justify-content:center;padding:20px;}
+.login-card{background:#fff;border:1.5px solid var(--border);border-radius:18px;padding:32px 28px;max-width:380px;width:100%;text-align:center;}
+.login-title{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:800;letter-spacing:1px;margin-bottom:8px;}
+.login-sub{font-size:13px;color:var(--text2);margin-bottom:26px;line-height:1.6;}
+.google-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:var(--black);font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;transition:all 0.2s;}
+.google-btn:hover{border-color:var(--blue);background:var(--blue-pale);}
+.google-btn svg{flex-shrink:0;}
+.login-error{color:#ff3b3b;font-size:12px;margin-top:12px;display:none;}
 
 /* FORM */
 .field{margin-bottom:18px;}
 .field-label{display:block;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--text2);text-transform:uppercase;margin-bottom:8px;}
 .field-label .req{color:var(--red);}
 .field-input{width:100%;background:var(--gray);border:1.5px solid var(--border);border-radius:8px;padding:13px 14px;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:600;color:var(--black);transition:border-color 0.2s,background 0.2s;}
-.field-input:focus{border-color:var(--gold);background:#fff;}
+.field-input:focus{border-color:var(--blue);background:#fff;}
 .field-hint{font-size:11px;color:var(--text2);opacity:0.7;margin-top:6px;}
 .field-error{font-size:11px;color:var(--red);margin-top:6px;display:none;}
 .field-error.show{display:block;}
 
 /* UPLOAD */
 .upload-trigger{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--gray);border:1.5px dashed var(--border);border-radius:10px;padding:16px;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--text2);transition:all 0.2s;}
-.upload-trigger:hover{border-color:var(--gold);color:var(--gold-dark);background:var(--gold-pale);}
+.upload-trigger:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-pale);}
 .upload-trigger.uploaded{background:rgba(0,200,83,0.1);border:1.5px solid rgba(0,200,83,0.4);color:var(--green);}
 .upload-trigger svg{flex-shrink:0;}
 
@@ -151,12 +101,23 @@ nav{position:sticky;top:0;z-index:100;background:rgba(248,245,235,0.96);backdrop
 .upload-thumb-row.show{display:flex;}
 .upload-thumb{width:56px;height:56px;border-radius:14px;overflow:hidden;position:relative;flex-shrink:0;background:var(--gray2);}
 .upload-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-.shimmer{position:absolute;inset:0;background:linear-gradient(100deg,#f0e9d8 30%,#f8f5eb 50%,#f0e9d8 70%);background-size:200% 100%;animation:shimmerMove 1.4s ease-in-out infinite;border-radius:14px;}
+.shimmer{position:absolute;inset:0;background:linear-gradient(100deg,#e8ecf5 30%,#f6f8fc 50%,#e8ecf5 70%);background-size:200% 100%;animation:shimmerMove 1.4s ease-in-out infinite;border-radius:14px;}
 @keyframes shimmerMove{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
 .upload-meta{flex:1;}
 .upload-meta-title{font-size:13px;font-weight:700;color:var(--black);}
 .upload-meta-sub{font-size:11px;color:var(--text2);}
 .upload-remove{font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;color:var(--red);background:none;border:none;margin-top:2px;text-decoration:underline;}
+
+/* PRIMARY BTN */
+.primary-btn{width:100%;background:var(--blue);color:#fff;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;padding:14px;border:none;border-radius:8px;transition:background 0.2s,transform 0.1s;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px;}
+.primary-btn:hover{background:var(--blue-dark);}
+.primary-btn:active{transform:scale(0.98);}
+.primary-btn:disabled{background:var(--gray2);color:var(--text2);pointer-events:none;}
+
+/* VERIFY BTN SPECIAL */
+#verify-btn{background:linear-gradient(135deg,var(--blue),var(--blue-dark));position:relative;overflow:hidden;}
+#verify-btn:hover{box-shadow:0 4px 15px rgba(26,111,255,0.3);}
+#verify-btn.verified{background:var(--green);}
 
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(10,10,26,0.55);z-index:300;opacity:0;pointer-events:none;transition:opacity 0.25s;display:flex;align-items:center;justify-content:center;padding:20px;}
@@ -168,13 +129,13 @@ nav{position:sticky;top:0;z-index:100;background:rgba(248,245,235,0.96);backdrop
 .modal-close-btn{width:30px;height:30px;border-radius:50%;background:var(--gray);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
 .modal-body{padding:16px 20px 24px;}
 
-/* EXAMPLE */
-.example-frame{border-radius:14px;overflow:hidden;border:1.5px solid var(--border);margin-bottom:8px;position:relative;background:linear-gradient(135deg,var(--gold-pale),var(--gray));aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;}
+/* UPLOAD MODAL SPECIFIC */
+.example-frame{border-radius:14px;overflow:hidden;border:1.5px solid var(--border);margin-bottom:8px;position:relative;background:linear-gradient(135deg,var(--blue-pale),var(--gray));aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;}
 .example-caption{font-size:11px;color:var(--text2);text-align:center;margin-bottom:18px;letter-spacing:0.5px;line-height:1.5;}
 .example-caption b{color:var(--black);}
 
 .dropzone{border:2px dashed var(--border);border-radius:14px;padding:26px 16px;text-align:center;transition:all 0.2s;background:var(--gray);cursor:pointer;position:relative;overflow:hidden;}
-.dropzone.dragover{border-color:var(--gold);background:var(--gold-pale);}
+.dropzone.dragover{border-color:var(--blue);background:var(--blue-pale);}
 .dropzone svg{margin-bottom:10px;}
 .dropzone-title{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--black);margin-bottom:4px;}
 .dropzone-sub{font-size:12px;color:var(--text2);}
@@ -185,21 +146,33 @@ nav{position:sticky;top:0;z-index:100;background:rgba(248,245,235,0.96);backdrop
 .dropzone-preview .shimmer{z-index:2;}
 .dropzone-preview .shimmer.hide{display:none;}
 
-.modal-save-btn{width:100%;background:var(--gold);color:#0a0a1a;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;padding:14px;border:none;border-radius:10px;margin-top:18px;text-transform:uppercase;transition:background 0.2s,transform 0.1s;}
-.modal-save-btn:hover{background:var(--gold-dark);color:#fff;}
+.modal-save-btn{width:100%;background:var(--blue);color:#fff;font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;padding:14px;border:none;border-radius:10px;margin-top:18px;text-transform:uppercase;transition:background 0.2s,transform 0.1s;}
+.modal-save-btn:hover{background:var(--blue-dark);}
 .modal-save-btn:active{transform:scale(0.98);}
 .modal-save-btn:disabled{background:var(--gray2);color:var(--text2);pointer-events:none;}
 
-/* STATUS VIEW */
-.status-icon-wrap{display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
-.status-badge{display:inline-flex;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;padding:7px 16px;border-radius:20px;text-transform:uppercase;}
-.status-pending{background:rgba(255,107,0,0.1);color:var(--orange);border:1.5px solid rgba(255,107,0,0.35);}
-.status-confirmed{background:rgba(0,200,83,0.1);color:var(--green);border:1.5px solid rgba(0,200,83,0.35);}
-.status-rejected{background:rgba(255,59,59,0.1);color:var(--red);border:1.5px solid rgba(255,59,59,0.35);}
-.summary-box{background:var(--gray);border-radius:10px;padding:14px 16px;margin-top:18px;font-size:13px;}
-.summary-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;color:var(--text2);gap:10px;}
-.summary-row b{color:var(--black);text-align:right;word-break:break-all;}
-.summary-row b a{color:var(--gold-dark);text-decoration:none;}
+/* VERIFICATION MODAL */
+.question-card{background:var(--gray);border:1.5px solid var(--border);border-radius:14px;padding:18px;margin-bottom:16px;}
+.q-badge{font-family:'Orbitron',sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;background:var(--blue-pale);color:var(--blue);padding:4px 12px;border-radius:6px;display:inline-block;}
+.q-text{font-size:15px;font-weight:600;color:var(--black);margin:14px 0 16px;line-height:1.5;}
+.options-list{margin-top:4px;}
+.option-label{display:flex;align-items:center;gap:12px;padding:13px 14px;background:#fff;border:1.5px solid var(--border);border-radius:10px;margin-bottom:8px;cursor:pointer;transition:all 0.2s;}
+.option-label:hover{border-color:var(--blue);background:var(--blue-pale);}
+.option-label.selected{border-color:var(--blue);background:rgba(26,111,255,0.08);}
+.option-label input{accent-color:var(--blue);width:18px;height:18px;flex-shrink:0;}
+.option-text{font-size:15px;font-weight:500;color:var(--black);}
+
+.step-indicator{font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--text2);margin-bottom:12px;text-align:center;}
+
+.verify-result{text-align:center;padding:10px 0;}
+.verify-success-icon{width:64px;height:64px;margin:0 auto 16px;background:rgba(0,200,83,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.verify-fail-icon{width:64px;height:64px;margin:0 auto 16px;background:rgba(255,59,59,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+
+/* STATUS PANEL */
+.status-badge{display:inline-flex;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;padding:7px 18px;border-radius:20px;text-transform:uppercase;}
+.status-pending{background:rgba(255,107,0,0.1);color:#ff6b00;border:1.5px solid rgba(255,107,0,0.35);}
+.status-confirmed{background:rgba(0,200,83,0.1);color:#00c853;border:1.5px solid rgba(0,200,83,0.35);}
+.status-rejected{background:rgba(255,59,59,0.1);color:#ff3b3b;border:1.5px solid rgba(255,59,59,0.35);}
 
 /* TOAST */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--black);color:#fff;font-family:'Orbitron',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;padding:12px 20px;border-radius:8px;z-index:999;opacity:0;transition:all 0.3s;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis;}
@@ -210,192 +183,191 @@ nav{position:sticky;top:0;z-index:100;background:rgba(248,245,235,0.96);backdrop
 </head>
 <body>
 
+<!-- LOADER - EXACTLY PRESERVED -->
 <div id="loader">
-  <div class="loader-content">
-    <img src="logo.png" class="loader-logo-img" alt="NOT HUMANS Logo">
-    <div class="loader-text">
-      <span class="nh-text">NOT HUMANS</span>
-      <span class="esports-text">ESPORTS</span>
-    </div>
-    <div class="loader-sub">OFFICIAL CASTER REGISTRATION</div>
+  <div class="loader-logo">
+    <span class="s-letter" style="color:#1a6fff;">N</span>
+    <span class="p-letter">H</span>
+    <span class="era-text">ESPORTS</span>
   </div>
   <div class="loader-bar"><div class="loader-bar-fill"></div></div>
 </div>
 
-<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
-<div class="sidebar" id="sidebar">
-  <button class="sidebar-close" onclick="closeSidebar()">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-  </button>
-  <a href="index.html" class="sidebar-link">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
-    TOURNAMENT HUB
-  </a>
-  <a href="#" id="rules-link" class="sidebar-link">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-    CASTER GUIDELINES
-  </a>
-</div>
-
-<nav>
-  <a href="index.html" class="nav-logo">
-    <img src="logo.png" alt="NOT HUMANS" style="height:26px;width:auto;">
-    <span>NOT HUMANS <span class="era">ESPORTS</span></span>
-  </a>
-  <div class="nav-right">
-    <div class="user-avatar" id="user-avatar"></div>
-    <button class="logout-btn" id="logout-btn" onclick="doLogout()">LOGOUT</button>
-    <button class="menu-btn" onclick="openSidebar()">
-      <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
-        <rect width="22" height="2.5" rx="1.25" fill="#0a0a1a"/>
-        <rect y="6.75" width="16" height="2.5" rx="1.25" fill="#0a0a1a"/>
-        <rect y="13.5" width="10" height="2.5" rx="1.25" fill="#c5a000"/>
-      </svg>
+<!-- GOOGLE LOGIN GATE -->
+<div id="login-gate" style="display:none;">
+  <div class="login-card">
+    <div class="loader-logo" style="justify-content:center;margin-bottom:12px;font-size:28px;">
+      <span style="color:#1a6fff;">N</span><span>H</span>
+    </div>
+    <div class="login-title">GUILD LEADER SIGN-IN</div>
+    <div class="login-sub">Sign in with Google to verify yourself and submit your guild's leadership details for NH MAC.</div>
+    <button class="google-btn" onclick="signInWithGoogle()">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.9 32.6 29.4 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l6-6C34.6 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.2-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 15.9 18.9 13 24 13c3.1 0 5.8 1.1 8 3l6-6C34.6 5.1 29.6 3 24 3 15.9 3 8.9 7.7 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.5 0 10.4-1.9 14.2-5.1l-6.6-5.4C29.6 36.1 26.9 37 24 37c-5.4 0-9.9-3.4-11.4-8.1l-6.6 5.1C8.9 40.3 15.9 45 24 45z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-1.1 3-3.4 5.4-6.3 6.9l6.6 5.4C39.3 37.4 43 31.4 43 24c0-1.2-.1-2.4-.4-3.5z"/></svg>
+      SIGN IN WITH GOOGLE
     </button>
-  </div>
-</nav>
-
-<div class="hero">
-  <div class="hero-overlay"></div>
-  <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0a1a 0%,#1a1508 50%,#050510 100%);">
-    <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(255,215,0,0.035) 40px,rgba(255,215,0,0.035) 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(255,215,0,0.035) 40px,rgba(255,215,0,0.035) 41px);"></div>
-  </div>
-  <div class="hero-content">
-    <div class="hero-tag">FACECAM CASTERS ONLY</div>
-    <div class="hero-title">CASTER <span>REGISTRATION</span></div>
-    <div class="hero-sub">NOT HUMANS ESPORTS · OFFICIAL BROADCAST TEAM</div>
+    <div id="login-error" class="login-error">Sign-in failed. Please try again.</div>
+    <div style="margin-top:20px;font-size:10px;color:var(--text2);opacity:0.6;">Only official guild leaders should sign in</div>
   </div>
 </div>
 
-<div class="section view active" id="view-disclaimer">
-  <div class="panel-card">
-    <div class="disclaimer-icon">
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#c5a000" stroke-width="1.6"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="M17 10l4-2.5v9L17 14" stroke-linejoin="round"/></svg>
-    </div>
-    <div class="panel-title">OFFICIAL DISCLAIMER</div>
-    <div class="panel-text">
-      This registration is exclusively for <b>facecam casters</b> looking to cast for official NOT HUMANS ESPORTS tournaments. We are only accepting casters who show their face on stream — <b>screen-only or voice-only casting will not be considered</b>. By continuing, you confirm your details are accurate and that you agree to the organizers' decisions regarding caster selection.
-    </div>
-    <button class="primary-btn" id="disclaimer-continue">I UNDERSTAND &amp; CONTINUE</button>
-  </div>
-</div>
+<!-- MAIN CONTENT (hidden until signed in) -->
+<div id="app-content" style="display:none;">
 
-<div class="section view" id="view-login">
-  <div class="panel-card">
-    <div class="panel-title">JOIN THE BROADCAST TEAM</div>
-    <div class="panel-text">Sign in with Google to submit your caster application for NOT HUMANS ESPORTS tournaments.</div>
-    <button class="google-btn" onclick="googleLogin()">
-      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-      CONTINUE WITH GOOGLE
+  <!-- SIDEBAR -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-close" onclick="closeSidebar()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <div class="sheet-note">Your data is secure and only used for caster selection.</div>
+    <a href="index.html" class="sidebar-link" onclick="closeSidebar()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+      TOURNAMENT HUB
+    </a>
+    <a href="https://not-humans.vercel.app" class="sidebar-link" onclick="closeSidebar()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="M17 10l4-2.5v9L17 14" stroke-linejoin="round"/></svg>
+      CASTER REGISTRATION
+    </a>
+    <a href="#" class="sidebar-link" onclick="openRulesModal(); closeSidebar();">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      NH MAC RULES
+    </a>
   </div>
-</div>
 
-<div class="section view" id="view-form">
-  <div class="section-title">CASTER APPLICATION</div>
-  <div class="panel-card">
-    <form id="reg-form">
-      <div class="field">
-        <label class="field-label">CASTER / CHANNEL NAME <span class="req">*</span></label>
-        <input class="field-input" id="f-name" type="text" maxlength="30" placeholder="e.g. NH_Caster" required/>
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">NH <span class="era">ESPORTS</span></a>
+    <div class="nav-right">
+      <div class="user-chip" id="user-chip">
+        <img id="user-photo" src="" alt="">
+        <span id="user-name"></span>
+        <button onclick="logoutUser()">LOGOUT</button>
       </div>
-
-      <div class="field">
-        <label class="field-label">WHATSAPP CONTACT <span class="req">*</span></label>
-        <input class="field-input" id="f-whatsapp" type="tel" placeholder="98765 43210 or +91 98765 43210" required/>
-        <div class="field-hint">Enter with or without country code. Numbers are auto-formatted for easy click-to-chat.</div>
-        <div class="field-error" id="err-whatsapp">Enter a valid mobile number.</div>
-      </div>
-
-      <div class="field">
-        <label class="field-label">CASTER YOUTUBE LINK 🔗 <span class="req">*</span></label>
-        <input class="field-input" id="f-youtube" type="url" placeholder="https://youtube.com/@yourchannel" required/>
-        <div class="field-hint">Link to your YouTube channel or a past casting VOD.</div>
-        <div class="field-error" id="err-youtube">Enter a valid YouTube link.</div>
-      </div>
-
-      <div class="field">
-        <label class="field-label">CASTER PHOTO — FACECAM PROOF <span class="req">*</span></label>
-        <button type="button" class="upload-trigger" id="upload-trigger">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
-          <span id="upload-trigger-text">UPLOAD PHOTO</span>
-        </button>
-        <div class="field-hint">Only casters who show their face on stream will be selected.</div>
-
-        <div class="upload-thumb-row" id="upload-thumb-row">
-          <div class="upload-thumb">
-            <div class="shimmer" id="thumb-shimmer"></div>
-            <img id="thumb-img" style="display:none;"/>
-          </div>
-          <div class="upload-meta">
-            <div class="upload-meta-title">Photo ready</div>
-            <div class="upload-meta-sub" id="thumb-status">Uploading…</div>
-            <button type="button" class="upload-remove" id="upload-remove">REMOVE</button>
-          </div>
-        </div>
-      </div>
-
-      <button class="primary-btn" type="submit" id="submit-btn" disabled>SUBMIT APPLICATION</button>
-      <div class="field-error" id="form-error" style="text-align:center;margin-top:12px;"></div>
-    </form>
-  </div>
-</div>
-
-<div class="section view" id="view-status">
-  <div class="panel-card" style="text-align:center;">
-    <div class="status-icon-wrap" id="status-icon-wrap">
-      <svg width="52" height="52" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#ff6b00" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="#ff6b00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-    <div class="panel-title">APPLICATION RECEIVED</div>
-    <div class="panel-text">Your caster application has been entered into the review queue. The committee will get back to you shortly.</div>
-    <div style="margin-top:16px;"><span class="status-badge status-pending" id="status-badge">PENDING</span></div>
-    <div class="summary-box" id="status-summary"></div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="rules-modal">
-  <div class="modal-box">
-    <div class="modal-head">
-      <div class="modal-title">CASTER GUIDELINES</div>
-      <button class="modal-close-btn" onclick="closeModal('rules-modal')">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <button class="menu-btn" onclick="openSidebar()">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+          <rect width="22" height="2.5" rx="1.25" fill="#0a0a1a"/>
+          <rect y="6.75" width="16" height="2.5" rx="1.25" fill="#0a0a1a"/>
+          <rect y="13.5" width="10" height="2.5" rx="1.25" fill="#1a6fff"/>
+        </svg>
       </button>
     </div>
-    <div class="modal-body">
-      <div id="rules-content" style="font-size:13px;color:var(--text2);line-height:1.7;white-space:pre-line;"></div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-overlay"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0a0a1a 0%,#0d1a40 50%,#050510 100%);">
+      <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 40px,rgba(26,111,255,0.04) 40px,rgba(26,111,255,0.04) 41px),repeating-linear-gradient(90deg,transparent,transparent 40px,rgba(26,111,255,0.04) 40px,rgba(26,111,255,0.04) 41px);"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-tag">OFFICIAL GUILD LEADERS ONLY</div>
+      <div class="hero-title">GUILD LEADER <span>VERIFICATION</span></div>
+      <div class="hero-sub">NH ESPORTS · NH MAC TOURNAMENTS</div>
     </div>
   </div>
+
+  <!-- MAIN FORM SECTION -->
+  <div class="section">
+    <div class="section-title">GUILD LEADER VERIFICATION PORTAL</div>
+
+    <div class="panel-card" id="panel-card">
+      <div id="form-intro" style="margin-bottom:18px;font-size:13px;color:var(--text2);line-height:1.6;">
+        Only Official Guild Leaders can verify themselves to participate in NH MAC tournaments. Complete the verification process below.
+      </div>
+
+      <form id="verify-form">
+        <!-- 1. Guild Leader Name -->
+        <div class="field">
+          <label class="field-label">GUILD LEADER NAME <span class="req">*</span></label>
+          <input class="field-input" id="leader-name" type="text" maxlength="40" placeholder="Enter Guild Leader Name" required/>
+        </div>
+
+        <!-- 2. Guild Leader UID -->
+        <div class="field">
+          <label class="field-label">GUILD LEADER UID <span class="req">*</span></label>
+          <input class="field-input" id="leader-uid" type="text" maxlength="12" placeholder="Enter Free Fire UID" required/>
+          <div class="field-hint">Only numbers allowed • Free Fire UID must be numeric</div>
+        </div>
+
+        <!-- 3. Leader WhatsApp No. -->
+        <div class="field">
+          <label class="field-label">LEADER WHATSAPP NO. <span class="req">*</span></label>
+          <input class="field-input" id="leader-whatsapp" type="tel" placeholder="98765 43210 or +91 98765 43210" required/>
+          <div class="field-hint">Enter with or without country code. Numbers only for verification.</div>
+        </div>
+
+        <!-- 4. Guild Name -->
+        <div class="field">
+          <label class="field-label">GUILD NAME <span class="req">*</span></label>
+          <input class="field-input" id="guild-name" type="text" maxlength="40" placeholder="Enter Guild Name" required/>
+        </div>
+
+        <!-- 5. Guild Screenshot Upload -->
+        <div class="field">
+          <label class="field-label">GUILD SCREENSHOT <span class="req">*</span></label>
+          <button type="button" class="upload-trigger" id="upload-trigger">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+            <span id="upload-trigger-text">UPLOAD GUILD SCREENSHOT</span>
+          </button>
+          <div class="field-hint">Transparent PNG preferred • High quality • Official guild branding only</div>
+
+          <div class="upload-thumb-row" id="upload-thumb-row">
+            <div class="upload-thumb">
+              <div class="shimmer" id="thumb-shimmer"></div>
+              <img id="thumb-img" style="display:none;"/>
+            </div>
+            <div class="upload-meta">
+              <div class="upload-meta-title">Screenshot ready</div>
+              <div class="upload-meta-sub" id="thumb-status">Uploading…</div>
+              <button type="button" class="upload-remove" id="upload-remove">REMOVE</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- VERIFY BUTTON -->
+        <button type="button" class="primary-btn" id="verify-btn">VERIFY TO KNOW MAC</button>
+
+        <!-- SUBMIT BUTTON (shown after verification) -->
+        <button type="submit" class="primary-btn" id="submit-btn" disabled style="margin-top:14px;">SUBMIT VERIFICATION</button>
+
+        <div style="text-align:center;margin-top:10px;font-size:11px;color:var(--text2);opacity:0.75;" id="submit-hint">Verification required before submission</div>
+      </form>
+    </div>
+  </div>
+
 </div>
 
+<!-- UPLOAD MODAL -->
 <div class="modal-overlay" id="upload-modal">
   <div class="modal-box">
     <div class="modal-head">
-      <div class="modal-title">UPLOAD CASTER PHOTO</div>
+      <div class="modal-title">UPLOAD GUILD SCREENSHOT</div>
       <button class="modal-close-btn" onclick="closeModal('upload-modal')">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
     </div>
     <div class="modal-body">
+      <!-- Example Guild Screenshot -->
       <div class="example-frame">
-        <svg width="120" height="90" viewBox="0 0 120 90" fill="none">
-          <rect x="8" y="8" width="104" height="74" rx="10" fill="#ffffff" stroke="#c5a000" stroke-width="2"/>
-          <circle cx="60" cy="38" r="16" fill="#fff8e1" stroke="#c5a000" stroke-width="2"/>
-          <circle cx="60" cy="33" r="7" fill="#c5a000"/>
-          <path d="M46 52c2-8 8-11 14-11s12 3 14 11" stroke="#c5a000" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <rect x="8" y="66" width="104" height="16" rx="0" fill="#c5a000" opacity="0.08"/>
-          <circle cx="98" cy="20" r="5" fill="#ff3b3b"/>
-          <text x="98" y="23.5" font-family="Arial" font-size="6" fill="#fff" text-anchor="middle" font-weight="bold">●</text>
-        </svg>
+        <div class="shimmer" id="example-shimmer"></div>
+        <img id="example-img" src="https://i.ibb.co/4nrzSckB/0f708722877b.jpg" alt="Example guild screenshot" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;opacity:0;transition:opacity .35s ease;">
       </div>
-      <div class="example-caption"><b>Facecam casters only.</b> Upload a clear photo of your face — this is used to confirm you cast on camera.</div>
+      <div class="example-caption"><b>Upload an image similar to the example above.</b><br>Official guild screenshot only.</div>
+
+      <div style="background:var(--gray);border-radius:10px;padding:14px 16px;margin-bottom:18px;font-size:12px;color:var(--text2);line-height:1.6;">
+        <div style="font-family:'Orbitron',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;color:var(--blue);margin-bottom:8px;">GUILD SCREENSHOT REQUIREMENTS</div>
+        • Transparent PNG Preferred<br>
+        • High Quality (min 512×512)<br>
+        • Clear, Readable Screenshot (no blur)<br>
+        • No Cropped Images<br>
+        • Must match your official guild branding
+      </div>
 
       <div class="dropzone" id="dropzone">
         <input type="file" accept="image/*" id="file-input" style="display:none;"/>
         <div id="dropzone-empty">
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#c5a000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#1a6fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           <div class="dropzone-title">DRAG &amp; DROP OR TAP TO BROWSE</div>
-          <div class="dropzone-sub">PNG or JPG, your face clearly visible</div>
+          <div class="dropzone-sub">PNG or JPG • Official guild screenshot</div>
         </div>
         <div class="dropzone-preview" id="dropzone-preview">
           <div class="shimmer" id="preview-shimmer"></div>
@@ -403,7 +375,81 @@ nav{position:sticky;top:0;z-index:100;background:rgba(248,245,235,0.96);backdrop
         </div>
       </div>
 
-      <button class="modal-save-btn" id="modal-save-btn" disabled>SAVE PHOTO</button>
+      <button class="modal-save-btn" id="modal-save-btn" disabled>SAVE SCREENSHOT</button>
+    </div>
+  </div>
+</div>
+
+<!-- VERIFICATION MODAL -->
+<div class="modal-overlay" id="verification-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">NH MAC RULE VERIFICATION</div>
+      <button class="modal-close-btn" onclick="closeModal('verification-modal')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div style="text-align:center;margin-bottom:16px;">
+        <div style="font-size:12px;color:var(--text2);letter-spacing:1px;">Answer both questions correctly to verify</div>
+      </div>
+
+      <div class="step-indicator" id="step-indicator">QUESTION <span id="q-step">1</span> / 2</div>
+
+      <div id="question-area"></div>
+
+      <button class="primary-btn" id="next-q-btn" style="margin-top:8px;">NEXT QUESTION</button>
+      <button class="primary-btn" id="submit-answers-btn" style="margin-top:8px; display:none;">SUBMIT ANSWERS</button>
+
+      <div id="verify-result" class="verify-result" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- RULES MODAL -->
+<div class="modal-overlay" id="rules-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">NH MAC OFFICIAL RULES</div>
+      <button class="modal-close-btn" onclick="closeModal('rules-modal')">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" style="font-size:13px;color:var(--text2);line-height:1.65;">
+      <div style="font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--blue);margin-bottom:10px;">TOURNAMENT RULES</div>
+      • Total Teams = 24<br>
+      • 3 League Matches Per Team<br>
+      • Win = 2 Points • Loss = 0 Points<br>
+      • Top 12 qualify for Quarter Final 1<br>
+      • Tie Break = Round Difference<br>
+      • Report 10 Minutes Before Match<br>
+      • No Show / Late Entry = Walkover (6-0)<br>
+      • Organizer Decision Final &amp; Binding<br><br>
+
+      <div style="font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--blue);margin-bottom:10px;">GAMEPLAY RULES</div>
+      • Unlimited Gloo Wall Allowed<br>
+      • Revive OFF • Gun Attribute OFF • Loadout OFF<br>
+      • Character Skills Allowed • All Pets Allowed<br>
+      • Headshot Mode Only<br>
+      • Allowed Guns: Desert Eagle, UMP, M1887, M10, Woodpecker, SPAS12<br>
+      • Only ONE UMP allowed per team<br>
+      • Roof NOT allowed • Normal Height Allowed<br>
+      • Only Two Wall Height Allowed on Container &amp; Observatory<br>
+      • Match Recording Compulsory<br>
+      • Return before Round 2 if disconnected (valid proof)<br>
+      • Final Zone (00:00): No Gloo • No Prone • No Punch<br><br>
+
+      <div style="font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--blue);margin-bottom:10px;">CHECKING RULES</div>
+      • Recording Mandatory<br>
+      • Phone Check within 15 minutes after match<br>
+      • Discord Verification may be requested<br>
+      • Android Root Not Allowed • Hack Files Not Allowed<br>
+      • iPhone Developer Mode OFF<br>
+      • No Device Changing • No Player ID Switching<br>
+      • VPN Strictly Prohibited<br>
+      • Any Hack/Config/Script/Panel/Third-party Tool = Direct Team Disqualification<br>
+      • Failure to submit recording within 15 minutes = Team Disqualification<br>
+      • Organizer Decision Final &amp; Binding
     </div>
   </div>
 </div>
@@ -411,385 +457,651 @@ nav{position:sticky;top:0;z-index:100;background:rgba(248,245,235,0.96);backdrop
 <div class="toast" id="toast"></div>
 
 <script type="module">
-import{initializeApp}from'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
-import{getAuth,signInWithPopup,GoogleAuthProvider,onAuthStateChanged,signOut}from'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
-import{getFirestore,collection,addDoc,query,where,getDocs,doc,onSnapshot,serverTimestamp,updateDoc}from'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+import { getFirestore, collection, doc, getDoc, setDoc, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js';
 
-/* ===========================================================================
-   FIREBASE SETUP — casters-reg project
-=========================================================================== */
+/* FIREBASE CONFIG — shared with the admin verification portal */
 const firebaseConfig = {
-  apiKey: "AIzaSyD-Q1sdXwZfTMXtMou9rcB7XGh6ZUdyumc",
-  authDomain: "casters-reg.firebaseapp.com",
-  projectId: "casters-reg",
-  storageBucket: "casters-reg.firebasestorage.app",
-  messagingSenderId: "571632504220",
-  appId: "1:571632504220:web:c65f62077477d97c0acc59"
+  apiKey: "AIzaSyDSArVM2s6emw5QzPb_Qdok2ndhEPEX9QY",
+  authDomain: "nh-leaders.firebaseapp.com",
+  projectId: "nh-leaders",
+  storageBucket: "nh-leaders.firebasestorage.app",
+  messagingSenderId: "214918232235",
+  appId: "1:214918232235:web:673b5b78d1f1fc38ae1fee"
 };
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
-const provider=new GoogleAuthProvider();
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
 
-/* imgbb — converts uploaded caster photos into public URLs */
-const IMGBB_API_KEY="405018efab5e2bd5e75f4dd0040a41c3";
-const IMGBB_UPLOAD_URL=`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`;
+/* IMGBB for screenshot upload */
+const IMGBB_API_KEY = "405018efab5e2bd5e75f4dd0040a41c3";
+const IMGBB_UPLOAD_URL = `https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`;
 
-/* Firestore collection */
-const COLLECTION_NAME='casters';
+const COLLECTION_NAME = 'guild_leader_verifications';
 
-let currentUser=null;
-let currentCasterDoc=null;
-let uploadedImageUrl=null;
-let pendingFile=null;
-let casterUnsub=null;
+let uploadedImageUrl = null;
+let pendingFile = null;
+let isVerified = false;
+let currentQuestions = [];
+let currentQIndex = 0;
+let selectedAnswers = {};
+let submissionUnsub = null;
+let currentUser = null;
 
-/* ---------------- view switching ---------------- */
-const VIEWS=['view-disclaimer','view-login','view-form','view-status'];
-function showView(id){
-  VIEWS.forEach(v=>{
-    const el=document.getElementById(v);
-    if(el) el.classList.toggle('active', v===id);
-  });
+/* QUESTION POOL - Based ONLY on official NH MAC rules */
+const questionPool = [
+  { id: 1, question: "How many teams participate in NH MAC tournaments?", options: ["20", "24", "28", "32"], correctIndex: 1 },
+  { id: 2, question: "How many league matches does each team play?", options: ["2", "3", "4", "5"], correctIndex: 1 },
+  { id: 3, question: "How many points does a team get for a win?", options: ["1 Point", "2 Points", "3 Points", "0 Points"], correctIndex: 1 },
+  { id: 4, question: "How many teams qualify for Quarter Final 1?", options: ["8", "10", "12", "16"], correctIndex: 2 },
+  { id: 5, question: "What is used as the tie-breaker?", options: ["Total Points", "Round Difference", "Total Kills", "Head to Head"], correctIndex: 1 },
+  { id: 6, question: "How many minutes before the match must teams report?", options: ["5 Minutes", "10 Minutes", "15 Minutes", "30 Minutes"], correctIndex: 1 },
+  { id: 7, question: "What happens if a team reports late or does not show?", options: ["Warning", "Restart Match", "Walkover (6-0)", "Nothing"], correctIndex: 2 },
+  { id: 8, question: "How many Gloo Walls are allowed?", options: ["Not Allowed", "Limited to 5", "Unlimited Allowed", "Only in Final"], correctIndex: 2 },
+  { id: 9, question: "Is Revive ON or OFF in NH MAC?", options: ["ON", "OFF"], correctIndex: 1 },
+  { id: 10, question: "How many UMPs are allowed per team?", options: ["1", "2", "Unlimited", "None"], correctIndex: 0 },
+  { id: 11, question: "Is the roof allowed during matches?", options: ["Yes", "No"], correctIndex: 1 },
+  { id: 12, question: "What is the maximum wall height allowed on Container & Observatory?", options: ["One Wall", "Two Walls", "Three Walls", "Unlimited"], correctIndex: 1 },
+  { id: 13, question: "Is match recording compulsory?", options: ["Optional", "Mandatory"], correctIndex: 1 },
+  { id: 14, question: "Within how many minutes after a match can phone check be requested?", options: ["5 Minutes", "10 Minutes", "15 Minutes", "30 Minutes"], correctIndex: 2 },
+  { id: 15, question: "Is VPN allowed in NH MAC?", options: ["Yes, Allowed", "Strictly Prohibited"], correctIndex: 1 },
+  { id: 16, question: "What happens if any hack, config, script or third-party tool is used?", options: ["Warning", "Points Deducted", "Direct Team Disqualification", "Retry Allowed"], correctIndex: 2 },
+  { id: 17, question: "What happens if recording is not submitted within 15 minutes?", options: ["Warning", "Team Disqualification", "Restart Match", "Nothing"], correctIndex: 1 },
+  { id: 18, question: "Is the Organizer's decision final and binding?", options: ["Can be appealed", "Final & Binding"], correctIndex: 1 }
+];
+
+function getRandomQuestions(count) {
+  const shuffled = [...questionPool].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
 }
 
-/* ---------------- modal helpers ---------------- */
-window.openModal=(id)=>{const m=document.getElementById(id); if(m) m.classList.add('open');};
-window.closeModal=(id)=>{const m=document.getElementById(id); if(m) m.classList.remove('open');};
+/* Modal helpers */
+window.openModal = (id) => document.getElementById(id).classList.add('open');
+window.closeModal = (id) => document.getElementById(id).classList.remove('open');
 
-/* ---------------- toast ---------------- */
-function showToast(msg){
-  const t=document.getElementById('toast');
-  if(!t) return;
-  t.textContent=msg;t.classList.add('show');
-  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2800);
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-/* ---------------- loader with logo animation (fast & immediate disclaimer) ---------------- */
-setTimeout(()=>{
-  const l=document.getElementById('loader');
-  if(!l) return;
-  l.style.transition='opacity 0.35s ease';
-  l.style.opacity='0';
-  setTimeout(()=>{
-    l.style.display='none';
-    // Show disclaimer immediately after short branded intro
-    showView('view-disclaimer');
-  }, 380);
-}, 980);
-
-/* ---------------- sidebar ---------------- */
-window.openSidebar=()=>{const o=document.getElementById('sidebar-overlay'); const s=document.getElementById('sidebar'); if(o) o.classList.add('open'); if(s) s.classList.add('open');};
-window.closeSidebar=()=>{const o=document.getElementById('sidebar-overlay'); const s=document.getElementById('sidebar'); if(o) o.classList.remove('open'); if(s) s.classList.remove('open');};
-
-/* ---------------- disclaimer ---------------- */
-const discBtn = document.getElementById('disclaimer-continue');
-if(discBtn) discBtn.addEventListener('click', routeAfterDisclaimer);
-let disclaimerAutoTimer=setTimeout(()=>{
-  if(document.getElementById('view-disclaimer') && document.getElementById('view-disclaimer').classList.contains('active')) routeAfterDisclaimer();
-},9000);
-
-async function routeAfterDisclaimer(){
-  clearTimeout(disclaimerAutoTimer);
-  if(!currentUser){ showView('view-login'); return; }
-  await routeLoggedInUser();
-}
-
-/* ---------------- auth ---------------- */
-onAuthStateChanged(auth, async user=>{
-  currentUser=user;
-  const lb=document.getElementById('logout-btn');
-  const av=document.getElementById('user-avatar');
-  if(user && lb && av){
-    lb.style.display='block';av.style.display='flex';
-    av.textContent=user.displayName?user.displayName[0].toUpperCase():'U';
-  }else if(lb && av){
-    lb.style.display='none';av.style.display='none';
-  }
-  if(document.getElementById('loader') && document.getElementById('loader').style.display==='none' && 
-     !document.getElementById('view-disclaimer').classList.contains('active')){
-    await routeLoggedInUser();
-  }
-});
-
-async function routeLoggedInUser(){
-  if(!currentUser){ showView('view-login'); return; }
-  try{
-    const snap=await getDocs(query(collection(db,COLLECTION_NAME), where('uid','==',currentUser.uid)));
-    if(!snap.empty){
-      const d=snap.docs[0];
-      currentCasterDoc={id:d.id, ...d.data()};
-      renderStatus(currentCasterDoc);
-      listenCaster(d.id);
-      showView('view-status');
-    }else{
-      showView('view-form');
-    }
-  }catch(e){ console.warn(e); showView('view-form'); }
-}
-
-function listenCaster(id){
-  if(casterUnsub) casterUnsub();
-  casterUnsub=onSnapshot(doc(db,COLLECTION_NAME,id), d=>{
-    if(!d.exists()) return;
-    currentCasterDoc={id:d.id, ...d.data()};
-    if(document.getElementById('view-status') && document.getElementById('view-status').classList.contains('active')) renderStatus(currentCasterDoc);
-  });
-}
-
-function renderStatus(caster){
-  const badge=document.getElementById('status-badge');
-  if(!badge) return;
-  badge.textContent=caster.status.toUpperCase();
-  badge.className=`status-badge status-${caster.status}`;
-
-  const iconWrap=document.getElementById('status-icon-wrap');
-  if(!iconWrap) return;
-  if(caster.status==='confirmed'){
-    iconWrap.innerHTML=`<svg width="52" height="52" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#00c853" stroke-width="1.6"/><path d="M8 12.5l2.5 2.5L16 9.5" stroke="#00c853" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  }else if(caster.status==='rejected'){
-    iconWrap.innerHTML=`<svg width="52" height="52" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#ff3b3b" stroke-width="1.6"/><path d="M9 9l6 6M15 9l-6 6" stroke="#ff3b3b" stroke-width="1.8" stroke-linecap="round"/></svg>`;
-  }else{
-    iconWrap.innerHTML=`<svg width="52" height="52" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#ff6b00" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="#ff6b00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  }
-
-  const sum=document.getElementById('status-summary');
-  if(sum) sum.innerHTML=`
-    <div class="summary-row"><span>Caster</span><b>${escapeHtml(caster.casterName)}</b></div>
-    <div class="summary-row"><span>WhatsApp</span><b>${escapeHtml(caster.whatsapp)}</b></div>
-    <div class="summary-row"><span>YouTube</span><b><a href="${escapeHtml(caster.youtubeLink)}" target="_blank" rel="noopener">View channel</a></b></div>
-  `;
-}
-
-window.googleLogin=async()=>{
-  try{ await signInWithPopup(auth, provider); }
-  catch(e){ showToast('LOGIN FAILED — TRY AGAIN'); }
+window.openSidebar = () => {
+  document.getElementById('sidebar-overlay').classList.add('open');
+  document.getElementById('sidebar').classList.add('open');
 };
-window.doLogout=async()=>{ await signOut(auth); showToast('LOGGED OUT'); showView('view-login'); };
+window.closeSidebar = () => {
+  document.getElementById('sidebar-overlay').classList.remove('open');
+  document.getElementById('sidebar').classList.remove('open');
+};
 
-/* ---------------- guidelines ---------------- */
-const rulesLink = document.getElementById('rules-link');
-if(rulesLink) rulesLink.addEventListener('click', e=>{
-  e.preventDefault(); closeSidebar(); openModal('rules-modal');
-});
-onSnapshot(doc(db,'config','casterGuidelines'), d=>{
-  const rc=document.getElementById('rules-content');
-  if(rc) rc.textContent = d.exists()? d.data().text : 'Caster guidelines have not been published yet. Check back soon.';
-});
+window.openRulesModal = () => {
+  closeSidebar();
+  openModal('rules-modal');
+};
 
-/* ===========================================================================
-   FORM VALIDATION
-=========================================================================== */
-const fName=document.getElementById('f-name');
-const fWhatsapp=document.getElementById('f-whatsapp');
-const fYoutube=document.getElementById('f-youtube');
-const submitBtn=document.getElementById('submit-btn');
+/* ============ LOADER + Google Auth gate ============
+   Both the loader-hide timer and the Firebase auth check are async and can
+   resolve in either order. Previously the loader's timeout unconditionally
+   forced the login screen open, which could stomp on an already-rendered
+   signed-in state and make a returning, still-logged-in user appear logged
+   out. Now both signals feed one function that decides what to show. */
+let loaderHidden = false;
+let authKnownUser = undefined; // undefined = not resolved yet, null = signed out, object = signed in
 
-function validWhatsapp(v){ return /^\+?\d{7,15}$/.test(v.replace(/[\s-]/g,'')); }
-function validYoutube(v){ return /^https?:\/\/(www\.)?(youtube\.com|youtu\.be)\/.+/i.test(v.trim()); }
+function updateAuthUI() {
+  if (!loaderHidden || authKnownUser === undefined) return; // wait for both signals
 
-function refreshSubmit(){
-  if(!submitBtn) return;
-  const ok = fName && fName.value.trim() &&
-    validWhatsapp(fWhatsapp ? fWhatsapp.value.trim() : '') &&
-    validYoutube(fYoutube ? fYoutube.value.trim() : '') &&
-    !!uploadedImageUrl;
-  submitBtn.disabled=!ok;
+  const gate = document.getElementById('login-gate');
+  const appContent = document.getElementById('app-content');
+
+  if (authKnownUser) {
+    gate.style.display = 'none';
+    appContent.style.display = 'block';
+  } else {
+    appContent.style.display = 'none';
+    gate.style.display = 'flex';
+  }
 }
-if(fName) fName.addEventListener('input',refreshSubmit);
-if(fWhatsapp) fWhatsapp.addEventListener('input',()=>{
-  const err=document.getElementById('err-whatsapp');
-  if(err) err.classList.toggle('show', fWhatsapp.value.trim()!=='' && !validWhatsapp(fWhatsapp.value.trim()));
-  refreshSubmit();
+
+setTimeout(() => {
+  const l = document.getElementById('loader');
+  l.style.transition = 'opacity 0.5s';
+  l.style.opacity = '0';
+  setTimeout(() => {
+    l.style.display = 'none';
+    loaderHidden = true;
+    updateAuthUI();
+  }, 500);
+}, 1600);
+
+/* ============ GOOGLE SIGN-IN ============ */
+window.signInWithGoogle = async function() {
+  const errEl = document.getElementById('login-error');
+  errEl.style.display = 'none';
+  try {
+    await signInWithPopup(auth, googleProvider);
+  } catch (e) {
+    console.error(e);
+    let msg = 'Sign-in failed. Please try again.';
+    if (e.code === 'auth/popup-blocked') msg = 'Your browser blocked the sign-in popup. Please allow popups and try again.';
+    else if (e.code === 'auth/popup-closed-by-user' || e.code === 'auth/cancelled-popup-request') msg = 'Sign-in was closed before finishing. Please try again.';
+    else if (e.code === 'auth/unauthorized-domain') msg = 'This domain isn\'t authorized for sign-in yet. Contact the site admin.';
+    errEl.textContent = msg;
+    errEl.style.display = 'block';
+  }
+};
+
+window.logoutUser = async function() {
+  if (submissionUnsub) { submissionUnsub(); submissionUnsub = null; }
+  await signOut(auth);
+  location.reload();
+};
+
+onAuthStateChanged(auth, (user) => {
+  currentUser = user;
+  authKnownUser = user; // null if signed out, user object if signed in
+
+  const chip = document.getElementById('user-chip');
+  if (user) {
+    chip.classList.add('show');
+    document.getElementById('user-photo').src = user.photoURL || '';
+    document.getElementById('user-name').textContent = user.displayName || user.email || 'Guild Leader';
+    checkExistingSubmission(user.uid);
+  } else {
+    chip.classList.remove('show');
+  }
+
+  updateAuthUI();
 });
-if(fYoutube) fYoutube.addEventListener('input',()=>{
-  const err=document.getElementById('err-youtube');
-  if(err) err.classList.toggle('show', fYoutube.value.trim()!=='' && !validYoutube(fYoutube.value.trim()));
-  refreshSubmit();
+
+/* UID input - only numbers */
+const uidInput = document.getElementById('leader-uid');
+uidInput.addEventListener('input', () => {
+  uidInput.value = uidInput.value.replace(/[^0-9]/g, '');
 });
 
-/* ===========================================================================
-   UPLOAD MODAL
-=========================================================================== */
-const dropzone=document.getElementById('dropzone');
-const fileInput=document.getElementById('file-input');
-const dzEmpty=document.getElementById('dropzone-empty');
-const dzPreview=document.getElementById('dropzone-preview');
-const previewImg=document.getElementById('preview-img');
-const previewShimmer=document.getElementById('preview-shimmer');
-const saveBtn=document.getElementById('modal-save-btn');
+/* Form validation */
+function refreshSubmit() {
+  const nameOk = document.getElementById('leader-name').value.trim() !== '';
+  const uidOk = document.getElementById('leader-uid').value.trim().length >= 6;
+  const whatsappOk = document.getElementById('leader-whatsapp').value.trim() !== '';
+  const guildOk = document.getElementById('guild-name').value.trim() !== '';
+  const logoOk = !!uploadedImageUrl;
+  const verifiedOk = isVerified;
 
-const uploadTrigger=document.getElementById('upload-trigger');
-if(uploadTrigger) uploadTrigger.addEventListener('click', ()=>{ openModal('upload-modal'); });
-
-if(dropzone){
-  dropzone.addEventListener('click', ()=>fileInput && fileInput.click());
-  dropzone.addEventListener('dragover', e=>{ e.preventDefault(); dropzone.classList.add('dragover'); });
-  dropzone.addEventListener('dragleave', ()=> dropzone.classList.remove('dragover'));
-  dropzone.addEventListener('drop', e=>{
-    e.preventDefault(); dropzone.classList.remove('dragover');
-    if(e.dataTransfer.files[0]) handleFilePicked(e.dataTransfer.files[0]);
-  });
+  const submitBtn = document.getElementById('submit-btn');
+  submitBtn.disabled = !(nameOk && uidOk && whatsappOk && guildOk && logoOk && verifiedOk);
 }
-if(fileInput) fileInput.addEventListener('change', e=>{
-  if(e.target.files[0]) handleFilePicked(e.target.files[0]);
+
+['leader-name', 'leader-uid', 'leader-whatsapp', 'guild-name'].forEach(id => {
+  document.getElementById(id).addEventListener('input', refreshSubmit);
 });
 
-function handleFilePicked(file){
-  pendingFile=file;
-  if(dzEmpty) dzEmpty.style.display='none';
-  if(dzPreview) dzPreview.classList.add('show');
-  if(previewShimmer) previewShimmer.classList.remove('hide');
-  if(previewImg) previewImg.style.opacity='0';
+/* Example screenshot image — shine/shimmer while it loads, fade in at full size once ready */
+(function setupExampleImage() {
+  const img = document.getElementById('example-img');
+  const shimmer = document.getElementById('example-shimmer');
+  if (!img || !shimmer) return;
 
-  const reader=new FileReader();
-  reader.onload=()=>{
-    if(previewImg){
-      previewImg.src=reader.result;
-      previewImg.onload=()=>{
-        if(previewShimmer) previewShimmer.classList.add('hide');
-        previewImg.style.transition='opacity .25s';
-        previewImg.style.opacity='1';
-      };
-    }
+  function reveal() {
+    shimmer.style.display = 'none';
+    img.style.opacity = '1';
+  }
+  function fail() {
+    shimmer.style.display = 'none';
+  }
+
+  if (img.complete && img.naturalWidth > 0) {
+    reveal(); // already cached/loaded before this script ran
+  } else {
+    img.addEventListener('load', reveal);
+    img.addEventListener('error', fail);
+  }
+})();
+
+/* Upload Modal Logic */
+const dropzone = document.getElementById('dropzone');
+const fileInput = document.getElementById('file-input');
+const dzEmpty = document.getElementById('dropzone-empty');
+const dzPreview = document.getElementById('dropzone-preview');
+const previewImg = document.getElementById('preview-img');
+const previewShimmer = document.getElementById('preview-shimmer');
+const saveBtn = document.getElementById('modal-save-btn');
+
+document.getElementById('upload-trigger').addEventListener('click', () => {
+  openModal('upload-modal');
+});
+
+dropzone.addEventListener('click', () => fileInput.click());
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+dropzone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropzone.classList.remove('dragover');
+  if (e.dataTransfer.files[0]) handleFilePicked(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', e => {
+  if (e.target.files[0]) handleFilePicked(e.target.files[0]);
+});
+
+function handleFilePicked(file) {
+  pendingFile = file;
+  dzEmpty.style.display = 'none';
+  dzPreview.classList.add('show');
+  previewShimmer.classList.remove('hide');
+  previewImg.style.opacity = '0';
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    previewImg.src = reader.result;
+    previewImg.onload = () => {
+      previewShimmer.classList.add('hide');
+      previewImg.style.transition = 'opacity .25s';
+      previewImg.style.opacity = '1';
+    };
   };
   reader.readAsDataURL(file);
-  if(saveBtn) saveBtn.disabled=false;
+  saveBtn.disabled = false;
 }
 
-if(saveBtn) saveBtn.addEventListener('click', async ()=>{
-  if(!pendingFile) return;
-  saveBtn.disabled=true;
-  saveBtn.textContent='UPLOADING…';
+saveBtn.addEventListener('click', async () => {
+  if (!pendingFile) return;
+  saveBtn.disabled = true;
+  saveBtn.textContent = 'UPLOADING…';
 
-  try{
-    const base64=await fileToBase64(pendingFile);
-    const form=new FormData();
+  try {
+    const base64 = await fileToBase64(pendingFile);
+    const form = new FormData();
     form.append('image', base64);
-    const res=await fetch(IMGBB_UPLOAD_URL,{method:'POST',body:form});
-    const json=await res.json();
-    if(!json.success) throw new Error('upload failed');
-    uploadedImageUrl=json.data.url;
+    const res = await fetch(IMGBB_UPLOAD_URL, { method: 'POST', body: form });
+    const json = await res.json();
+    if (!json.success) throw new Error('upload failed');
+    uploadedImageUrl = json.data.url;
 
-    const trigger=document.getElementById('upload-trigger');
-    if(trigger){
-      trigger.classList.add('uploaded');
-      const txt=document.getElementById('upload-trigger-text');
-      if(txt) txt.textContent='UPLOADED';
-      const svg=trigger.querySelector('svg');
-      if(svg) svg.outerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
-    }
+    const trigger = document.getElementById('upload-trigger');
+    trigger.classList.add('uploaded');
+    document.getElementById('upload-trigger-text').textContent = 'SCREENSHOT UPLOADED';
+    trigger.querySelector('svg').outerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 
-    const thumbRow=document.getElementById('upload-thumb-row');
-    if(thumbRow) thumbRow.classList.add('show');
-    const thumbShimmer=document.getElementById('thumb-shimmer');
-    if(thumbShimmer) thumbShimmer.classList.remove('hide');
-    const thumbImg=document.getElementById('thumb-img');
-    if(thumbImg){
-      thumbImg.style.display='none';
-      thumbImg.onload=()=>{
-        if(thumbShimmer) thumbShimmer.style.display='none';
-        thumbImg.style.display='block';
-      };
-      thumbImg.src=uploadedImageUrl;
-    }
-    const thumbStatus=document.getElementById('thumb-status');
-    if(thumbStatus) thumbStatus.textContent='Uploaded ✓';
+    const thumbRow = document.getElementById('upload-thumb-row');
+    thumbRow.classList.add('show');
+    document.getElementById('thumb-shimmer').classList.remove('hide');
+    const thumbImg = document.getElementById('thumb-img');
+    thumbImg.style.display = 'none';
+    thumbImg.onload = () => {
+      document.getElementById('thumb-shimmer').style.display = 'none';
+      thumbImg.style.display = 'block';
+    };
+    thumbImg.src = uploadedImageUrl;
+    document.getElementById('thumb-status').textContent = 'Uploaded ✓';
 
     refreshSubmit();
     closeModal('upload-modal');
-    showToast('PHOTO SAVED');
-  }catch(e){
+    showToast('GUILD SCREENSHOT SAVED');
+  } catch (e) {
     console.error(e);
     showToast('UPLOAD FAILED — TRY AGAIN');
-  }finally{
-    if(saveBtn){
-      saveBtn.textContent='SAVE PHOTO';
-      saveBtn.disabled = !pendingFile ? true : false;
-    }
+  } finally {
+    saveBtn.textContent = 'SAVE SCREENSHOT';
+    saveBtn.disabled = !pendingFile;
   }
 });
 
-const uploadRemove=document.getElementById('upload-remove');
-if(uploadRemove) uploadRemove.addEventListener('click', ()=>{
-  uploadedImageUrl=null; pendingFile=null;
-  const thumbRow=document.getElementById('upload-thumb-row');
-  if(thumbRow) thumbRow.classList.remove('show');
-  const trigger=document.getElementById('upload-trigger');
-  if(trigger){
-    trigger.classList.remove('uploaded');
-    const txt=document.getElementById('upload-trigger-text');
-    if(txt) txt.textContent='UPLOAD PHOTO';
-    const svg=trigger.querySelector('svg');
-    if(svg) svg.outerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>';
-  }
-  if(dzEmpty) dzEmpty.style.display='block';
-  if(dzPreview) dzPreview.classList.remove('show');
-  if(saveBtn) saveBtn.disabled=true;
+document.getElementById('upload-remove').addEventListener('click', () => {
+  uploadedImageUrl = null;
+  pendingFile = null;
+  document.getElementById('upload-thumb-row').classList.remove('show');
+  const trigger = document.getElementById('upload-trigger');
+  trigger.classList.remove('uploaded');
+  document.getElementById('upload-trigger-text').textContent = 'UPLOAD GUILD SCREENSHOT';
+  trigger.querySelector('svg').outerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>';
+  dzEmpty.style.display = 'block';
+  dzPreview.classList.remove('show');
+  saveBtn.disabled = true;
   refreshSubmit();
 });
 
-function fileToBase64(file){
-  return new Promise((resolve,reject)=>{
-    const r=new FileReader();
-    r.onload=()=>resolve(r.result.split(',')[1]);
-    r.onerror=reject;
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result.split(',')[1]);
+    r.onerror = reject;
     r.readAsDataURL(file);
   });
 }
 
-/* ===========================================================================
-   SUBMIT APPLICATION
-=========================================================================== */
-const regForm=document.getElementById('reg-form');
-if(regForm) regForm.addEventListener('submit', async e=>{
-  e.preventDefault();
-  if(!submitBtn || submitBtn.disabled || !currentUser) return;
-  const errEl=document.getElementById('form-error');
-  if(errEl) errEl.textContent='';
-  submitBtn.disabled=true; submitBtn.textContent='SUBMITTING…';
+/* VERIFY BUTTON - Morph Animation + Open Verification */
+const verifyBtn = document.getElementById('verify-btn');
+verifyBtn.addEventListener('click', () => {
+  const name = document.getElementById('leader-name').value.trim();
+  const uid = document.getElementById('leader-uid').value.trim();
+  const guild = document.getElementById('guild-name').value.trim();
 
-  let whatsappFormatted = fWhatsapp.value.trim().replace(/[\s-]/g,'');
-  if (!whatsappFormatted.startsWith('+')) {
-    if (whatsappFormatted.length === 10) {
-      whatsappFormatted = '+91' + whatsappFormatted;
-    } else {
-      whatsappFormatted = '+' + whatsappFormatted;
-    }
+  if (!name || !uid || !guild || !uploadedImageUrl) {
+    showToast('PLEASE FILL ALL FIELDS & UPLOAD SCREENSHOT FIRST');
+    return;
   }
 
-  const payload={
-    casterName:fName.value.trim(),
-    whatsapp:whatsappFormatted,
-    youtubeLink:fYoutube.value.trim(),
-    photoUrl:uploadedImageUrl,
-    status:'pending',
-    uid:currentUser.uid,
-    email:currentUser.email||null,
-    createdAt:serverTimestamp()
-  };
+  verifyBtn.disabled = true;
+  const originalText = verifyBtn.innerHTML;
+  verifyBtn.style.transition = 'all 0.35s ease';
+  verifyBtn.innerHTML = `
+    <span style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;">
+      <span style="width:18px;height:18px;border:2.5px solid #fff;border-radius:50%;display:inline-block;flex-shrink:0;"></span>
+      <span style="flex:1;height:2.5px;background:#fff;max-width:70px;border-radius:2px;"></span>
+      <span style="width:10px;height:10px;background:#fff;border-radius:50%;display:inline-block;flex-shrink:0;"></span>
+    </span>
+  `;
 
-  try{
-    const ref=await addDoc(collection(db,COLLECTION_NAME), payload);
-    currentCasterDoc={id:ref.id, ...payload, status:'pending'};
-    listenCaster(ref.id);
-    renderStatus(currentCasterDoc);
-    showView('view-status');
-    showToast('APPLICATION SUBMITTED');
-  }catch(err){
-    console.error(err);
-    if(errEl) errEl.textContent='Something went wrong submitting your application. Please try again.';
-    showToast('SUBMISSION FAILED');
-  }finally{
-    if(submitBtn){
-      submitBtn.textContent='SUBMIT APPLICATION';
-      refreshSubmit();
-    }
+  setTimeout(() => {
+    verifyBtn.innerHTML = originalText;
+    verifyBtn.disabled = false;
+    openVerificationModal();
+  }, 1350);
+});
+
+function openVerificationModal() {
+  const modal = document.getElementById('verification-modal');
+  modal.classList.add('open');
+
+  document.getElementById('verify-result').style.display = 'none';
+  document.getElementById('question-area').style.display = 'block';
+  document.getElementById('next-q-btn').style.display = 'block';
+  document.getElementById('submit-answers-btn').style.display = 'none';
+  document.getElementById('step-indicator').style.display = 'block';
+
+  currentQuestions = getRandomQuestions(2);
+  currentQIndex = 0;
+  selectedAnswers = {};
+
+  renderCurrentQuestion();
+}
+
+function renderCurrentQuestion() {
+  const area = document.getElementById('question-area');
+  area.innerHTML = '';
+  area.style.display = 'block';
+
+  const q = currentQuestions[currentQIndex];
+
+  const card = document.createElement('div');
+  card.className = 'question-card';
+
+  let html = `
+    <div class="q-header">
+      <span class="q-badge">QUESTION ${currentQIndex + 1} OF 2</span>
+    </div>
+    <div class="q-text">${q.question}</div>
+    <div class="options-list">
+  `;
+
+  q.options.forEach((opt, idx) => {
+    html += `
+      <label class="option-label" data-idx="${idx}">
+        <input type="radio" name="q${currentQIndex}" value="${idx}">
+        <span class="option-text">${opt}</span>
+      </label>
+    `;
+  });
+
+  html += `</div>`;
+  card.innerHTML = html;
+  area.appendChild(card);
+
+  const labels = card.querySelectorAll('.option-label');
+  labels.forEach(label => {
+    const radio = label.querySelector('input');
+    radio.addEventListener('change', () => {
+      labels.forEach(l => l.classList.remove('selected'));
+      label.classList.add('selected');
+      selectedAnswers[currentQIndex] = parseInt(radio.value);
+      updateNavButtons();
+    });
+  });
+
+  updateNavButtons();
+  document.getElementById('q-step').textContent = currentQIndex + 1;
+}
+
+function updateNavButtons() {
+  const nextBtn = document.getElementById('next-q-btn');
+  const submitBtn = document.getElementById('submit-answers-btn');
+
+  const hasAnswer = selectedAnswers[currentQIndex] !== undefined;
+
+  if (currentQIndex === 0) {
+    nextBtn.style.display = 'block';
+    nextBtn.disabled = !hasAnswer;
+    submitBtn.style.display = 'none';
+  } else {
+    nextBtn.style.display = 'none';
+    submitBtn.style.display = 'block';
+    submitBtn.disabled = !hasAnswer;
+  }
+}
+
+document.getElementById('next-q-btn').addEventListener('click', () => {
+  if (currentQIndex < 1) {
+    currentQIndex++;
+    renderCurrentQuestion();
   }
 });
 
-function escapeHtml(str){
-  return String(str??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+document.getElementById('submit-answers-btn').addEventListener('click', () => {
+  checkVerificationAnswers();
+});
+
+function checkVerificationAnswers() {
+  const area = document.getElementById('question-area');
+  const navNext = document.getElementById('next-q-btn');
+  const navSubmit = document.getElementById('submit-answers-btn');
+  const resultDiv = document.getElementById('verify-result');
+
+  area.style.display = 'none';
+  navNext.style.display = 'none';
+  navSubmit.style.display = 'none';
+  document.getElementById('step-indicator').style.display = 'none';
+
+  const q1Correct = selectedAnswers[0] === currentQuestions[0].correctIndex;
+  const q2Correct = selectedAnswers[1] === currentQuestions[1].correctIndex;
+
+  resultDiv.style.display = 'block';
+
+  if (q1Correct && q2Correct) {
+    resultDiv.innerHTML = `
+      <div class="verify-success-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:20px;font-weight:800;color:#00c853;letter-spacing:1px;margin-bottom:8px;">VERIFICATION SUCCESSFUL</div>
+      <div style="color:var(--text2);font-size:14px;margin-bottom:22px;">You have correctly answered both questions.<br>Your knowledge of NH MAC rules is verified.</div>
+      <button class="primary-btn" style="max-width:240px;margin:0 auto;" onclick="completeVerification()">CLOSE &amp; CONTINUE</button>
+    `;
+    isVerified = true;
+  } else {
+    resultDiv.innerHTML = `
+      <div class="verify-fail-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff3b3b" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </div>
+      <div style="font-family:'Orbitron',sans-serif;font-size:20px;font-weight:800;color:#ff3b3b;letter-spacing:1px;margin-bottom:8px;">VERIFICATION FAILED</div>
+      <div style="color:var(--text2);font-size:14px;margin-bottom:22px;">One or more answers were incorrect.<br>Please review the rules carefully and try again.</div>
+      <button class="primary-btn" style="max-width:260px;margin:0 auto;background:#ff3b3b;" onclick="retryVerification()">TRY AGAIN WITH NEW QUESTIONS</button>
+    `;
+  }
+}
+
+window.completeVerification = function() {
+  closeModal('verification-modal');
+
+  const vBtn = document.getElementById('verify-btn');
+  vBtn.innerHTML = `✔ VERIFIED — READY TO SUBMIT`;
+  vBtn.style.background = 'var(--green)';
+  vBtn.style.border = 'none';
+  vBtn.disabled = true;
+  vBtn.classList.add('verified');
+
+  document.getElementById('submit-hint').textContent = 'Ready to submit';
+  refreshSubmit();
+  showToast('VERIFICATION COMPLETE');
+};
+
+window.retryVerification = function() {
+  document.getElementById('verification-modal').classList.remove('open');
+  setTimeout(() => {
+    openVerificationModal();
+  }, 280);
+};
+
+/* ===========================================================================
+   STATUS PANEL — shown once this user (by uid) has an existing submission
+=========================================================================== */
+function statusIconSvg(status) {
+  if (status === 'confirmed') {
+    return `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg>`;
+  } else if (status === 'rejected') {
+    return `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ff3b3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9 9l6 6M15 9l-6 6"/></svg>`;
+  }
+  return `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`;
+}
+
+function statusTitleText(status) {
+  if (status === 'confirmed') return 'VERIFICATION CONFIRMED';
+  if (status === 'rejected') return 'VERIFICATION REJECTED';
+  return 'SUBMISSION RECEIVED';
+}
+
+function statusSubText(status) {
+  if (status === 'confirmed') return 'You are confirmed as an official Guild Leader for NH MAC.';
+  if (status === 'rejected') return 'Your verification was not approved. Contact the organizers for details.';
+  return 'Your guild leader verification is under review';
+}
+
+function renderStatusPanel(data, docId) {
+  const panel = document.getElementById('panel-card');
+  const logoThumb = data.guildLogoUrl
+    ? `<img src="${escapeHtml(data.guildLogoUrl)}" style="width:52px;height:52px;border-radius:10px;object-fit:cover;border:1.5px solid var(--border);">`
+    : `<div style="width:52px;height:52px;border-radius:10px;background:var(--gray);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text2);">SCREENSHOT</div>`;
+
+  panel.innerHTML = `
+    <div style="text-align:center;padding:8px 4px 4px;">
+      <div style="margin-bottom:16px;">
+        <div id="status-icon-wrap" style="width:64px;height:64px;margin:0 auto 12px;background:rgba(255,107,0,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+          ${statusIconSvg(data.status)}
+        </div>
+        <div id="status-title" style="font-family:'Orbitron',sans-serif;font-size:17px;font-weight:800;color:var(--black);letter-spacing:0.5px;margin-bottom:4px;">${statusTitleText(data.status)}</div>
+        <div id="status-sub" style="font-size:12px;color:var(--text2);">${statusSubText(data.status)}</div>
+      </div>
+
+      <div style="margin:14px 0 20px;">
+        <span id="status-badge" class="status-badge status-${data.status}" style="font-size:11px;padding:8px 20px;">${data.status.toUpperCase()}</span>
+      </div>
+
+      <div style="background:var(--gray);border-radius:12px;padding:16px 18px;text-align:left;max-width:100%;margin:0 auto;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">
+          <span style="font-size:12px;color:var(--text2);">Guild Leader</span>
+          <span style="font-weight:700;color:var(--black);">${escapeHtml(data.leaderName)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <span style="font-size:12px;color:var(--text2);">Free Fire UID</span>
+          <span style="font-weight:700;color:var(--black);">${escapeHtml(data.leaderUID)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <span style="font-size:12px;color:var(--text2);">WhatsApp</span>
+          <span style="font-weight:700;color:var(--black);">${escapeHtml(data.leaderWhatsapp)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <span style="font-size:12px;color:var(--text2);">Guild Name</span>
+          <span style="font-weight:700;color:var(--black);">${escapeHtml(data.guildName)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+          <span style="font-size:12px;color:var(--text2);padding-top:4px;">Guild Screenshot</span>
+          <div>${logoThumb}</div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;font-size:12px;color:var(--text2);line-height:1.5;">
+        Organizers will review and update your status to <b>CONFIRMED</b> or <b>REJECTED</b>.<br>
+        This page updates automatically — no need to refresh.
+      </div>
+    </div>
+  `;
+
+  if (submissionUnsub) submissionUnsub();
+  submissionUnsub = onSnapshot(doc(db, COLLECTION_NAME, docId), snap => {
+    if (!snap.exists()) return;
+    const fresh = snap.data();
+    const badge = document.getElementById('status-badge');
+    const iconWrap = document.getElementById('status-icon-wrap');
+    const title = document.getElementById('status-title');
+    const sub = document.getElementById('status-sub');
+    if (badge) {
+      badge.className = `status-badge status-${fresh.status}`;
+      badge.textContent = fresh.status.toUpperCase();
+    }
+    if (iconWrap) iconWrap.innerHTML = statusIconSvg(fresh.status);
+    if (title) title.textContent = statusTitleText(fresh.status);
+    if (sub) sub.textContent = statusSubText(fresh.status);
+  });
+}
+
+/* Check Firestore (keyed by uid) for a previous submission on sign-in */
+async function checkExistingSubmission(uid) {
+  try {
+    const snap = await getDoc(doc(db, COLLECTION_NAME, uid));
+    if (snap.exists()) {
+      renderStatusPanel(snap.data(), uid);
+    }
+  } catch (e) {
+    console.warn('Could not check existing submission', e);
+  }
+}
+
+/* FORM SUBMISSION — one document per signed-in user, keyed by their uid */
+document.getElementById('verify-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const submitBtn = document.getElementById('submit-btn');
+  if (submitBtn.disabled || !isVerified || !currentUser) return;
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'SUBMITTING TO NH MAC...';
+
+  try {
+    let whatsappVal = document.getElementById('leader-whatsapp').value.trim().replace(/[\s-]/g, '');
+    if (!whatsappVal.startsWith('+')) {
+      if (whatsappVal.length === 10) whatsappVal = '+91' + whatsappVal;
+      else whatsappVal = '+' + whatsappVal;
+    }
+
+    const payload = {
+      uid: currentUser.uid,
+      leaderEmail: currentUser.email || null,
+      leaderName: document.getElementById('leader-name').value.trim(),
+      leaderUID: document.getElementById('leader-uid').value.trim(),
+      leaderWhatsapp: whatsappVal,
+      guildName: document.getElementById('guild-name').value.trim(),
+      guildLogoUrl: uploadedImageUrl,
+      status: 'pending',
+      submittedAt: serverTimestamp()
+    };
+
+    await setDoc(doc(db, COLLECTION_NAME, currentUser.uid), payload);
+
+    renderStatusPanel({ ...payload, status: 'pending' }, currentUser.uid);
+    showToast('SUBMITTED SUCCESSFULLY');
+  } catch (err) {
+    console.error(err);
+    showToast('SUBMISSION FAILED — PLEASE TRY AGAIN');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'SUBMIT VERIFICATION';
+  }
+});
+
+function escapeHtml(str) {
+  return String(str ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 </script>
 </body>
