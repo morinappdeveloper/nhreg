@@ -391,15 +391,12 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop
     </div>
     <div class="modal-body">
       <div style="text-align:center;margin-bottom:16px;">
-        <div style="font-size:12px;color:var(--text2);letter-spacing:1px;">Answer both questions correctly to verify</div>
+        <div style="font-size:12px;color:var(--text2);letter-spacing:1px;">Answer all 17 questions — you need at least 13 correct to verify</div>
       </div>
-
-      <div class="step-indicator" id="step-indicator">QUESTION <span id="q-step">1</span> / 2</div>
 
       <div id="question-area"></div>
 
-      <button class="primary-btn" id="next-q-btn" style="margin-top:8px;">NEXT QUESTION</button>
-      <button class="primary-btn" id="submit-answers-btn" style="margin-top:8px; display:none;">SUBMIT ANSWERS</button>
+      <button class="primary-btn" id="submit-answers-btn" style="margin-top:8px;" disabled>SUBMIT ANSWERS</button>
 
       <div id="verify-result" class="verify-result" style="display:none;"></div>
     </div>
@@ -484,31 +481,32 @@ const COLLECTION_NAME = 'guild_leader_verifications';
 let uploadedImageUrl = null;
 let pendingFile = null;
 let isVerified = false;
-let currentQuestions = [];
-let currentQIndex = 0;
 let selectedAnswers = {};
 let submissionUnsub = null;
 let currentUser = null;
 
-/* QUESTION POOL - Based ONLY on official NH MAC rules */
-const questionPool = [
-  { id: 1, question: "How many Gloo Walls are allowed?", options: ["Not Allowed", "Limited to 5", "Unlimited Allowed", "Only in Final"], correctIndex: 2 },
-  { id: 2, question: "Is Revive ON or OFF in NH MAC?", options: ["ON", "OFF"], correctIndex: 1 },
-  { id: 3, question: "How many UMPs are allowed per team?", options: ["1", "2", "Unlimited", "None"], correctIndex: 0 },
-  { id: 4, question: "Is the roof allowed during matches?", options: ["Yes", "No"], correctIndex: 1 },
-  { id: 5, question: "What is the maximum wall height allowed on Container & Observatory?", options: ["One Wall", "Two Walls", "Three Walls", "Unlimited"], correctIndex: 1 },
-  { id: 6, question: "Is match recording compulsory?", options: ["Optional", "Mandatory"], correctIndex: 1 },
-  { id: 7, question: "Within how many minutes after a match can phone check be requested?", options: ["5 Minutes", "10 Minutes", "15 Minutes", "30 Minutes"], correctIndex: 2 },
-  { id: 8, question: "Is VPN allowed in NH MAC?", options: ["Yes, Allowed", "Strictly Prohibited"], correctIndex: 1 },
-  { id: 9, question: "What happens if any hack, config, script or third-party tool is used?", options: ["Warning", "Points Deducted", "Direct Team Disqualification", "Retry Allowed"], correctIndex: 2 },
-  { id: 10, question: "What happens if recording is not submitted within 15 minutes?", options: ["Warning", "Team Disqualification", "Restart Match", "Nothing"], correctIndex: 1 },
-  { id: 11, question: "Is the Organizer's decision final and binding?", options: ["Can be appealed", "Final & Binding"], correctIndex: 1 }
-];
+/* QUESTION POOL - full fixed list, shown all at once. Need PASS_THRESHOLD or more correct to verify. */
+const PASS_THRESHOLD = 13; // out of questionPool.length
 
-function getRandomQuestions(count) {
-  const shuffled = [...questionPool].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
-}
+const questionPool = [
+  { question: "Are Unlimited Gloo Walls Allowed?", options: ["No", "Only 2", "Yes", "Only 5"], correctIndex: 2 },
+  { question: "Revive is:", options: ["ON", "Limited", "OFF", "Final Round Only"], correctIndex: 2 },
+  { question: "Gun Attributes are:", options: ["ON", "Tournament Only", "Optional", "OFF"], correctIndex: 3 },
+  { question: "Loadout is:", options: ["ON", "OFF", "Final Round Only", "Unlimited"], correctIndex: 1 },
+  { question: "Mode is:", options: ["Normal Damage", "Bodyshot Only", "Headshot Only", "Sniper Only"], correctIndex: 2 },
+  { question: "Which skill is allowed?", options: ["Dimitri", "Chrono", "Alok", "K"], correctIndex: 2 },
+  { question: "Pets are:", options: ["Not Allowed", "One Pet Only", "Tournament Only", "All Allowed"], correctIndex: 3 },
+  { question: "Which gun is allowed?", options: ["MP40", "AK47", "M1887", "M1014"], correctIndex: 2 },
+  { question: "Maximum UMP allowed per team?", options: ["2", "3", "Unlimited", "1"], correctIndex: 3 },
+  { question: "Maximum Gloo Wall Height?", options: ["1 Wall", "2 Walls", "3 Walls", "Unlimited"], correctIndex: 1 },
+  { question: "Handcam/POV is mandatory in:", options: ["Normal Matches", "Scrims", "Tournaments", "Custom Rooms"], correctIndex: 2 },
+  { question: "Final Zone starts at:", options: ["00:10", "00:05", "00:00", "00:20"], correctIndex: 2 },
+  { question: "Which is NOT allowed in the Final Zone?", options: ["Shooting", "Prone", "Jumping", "Running"], correctIndex: 1 },
+  { question: "Back-Out is allowed before:", options: ["1st Round", "3rd Round", "2nd Round Respawn", "Match End"], correctIndex: 2 },
+  { question: "VPN is:", options: ["Allowed", "Tournament Only", "Optional", "Strictly Not Allowed"], correctIndex: 3 },
+  { question: "Hack/Panel/Config/Script results in:", options: ["Warning", "Re-Round", "Match Restart", "Disqualification"], correctIndex: 3 },
+  { question: "Whose decision is final?", options: ["Players", "Guild Leader", "Referee Only", "Host/Admin"], correctIndex: 3 }
+];
 
 /* Modal helpers */
 window.openModal = (id) => document.getElementById(id).classList.add('open');
@@ -803,86 +801,64 @@ function openVerificationModal() {
 
   document.getElementById('verify-result').style.display = 'none';
   document.getElementById('question-area').style.display = 'block';
-  document.getElementById('next-q-btn').style.display = 'block';
-  document.getElementById('submit-answers-btn').style.display = 'none';
-  document.getElementById('step-indicator').style.display = 'block';
+  document.getElementById('submit-answers-btn').style.display = 'block';
 
-  currentQuestions = getRandomQuestions(2);
-  currentQIndex = 0;
   selectedAnswers = {};
-
-  renderCurrentQuestion();
+  renderAllQuestions();
 }
 
-function renderCurrentQuestion() {
+const OPTION_LETTERS = ['A', 'B', 'C', 'D'];
+
+function renderAllQuestions() {
   const area = document.getElementById('question-area');
   area.innerHTML = '';
   area.style.display = 'block';
 
-  const q = currentQuestions[currentQIndex];
+  questionPool.forEach((q, qIdx) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
 
-  const card = document.createElement('div');
-  card.className = 'question-card';
-
-  let html = `
-    <div class="q-header">
-      <span class="q-badge">QUESTION ${currentQIndex + 1} OF 2</span>
-    </div>
-    <div class="q-text">${q.question}</div>
-    <div class="options-list">
-  `;
-
-  q.options.forEach((opt, idx) => {
-    html += `
-      <label class="option-label" data-idx="${idx}">
-        <input type="radio" name="q${currentQIndex}" value="${idx}">
-        <span class="option-text">${opt}</span>
-      </label>
+    let html = `
+      <div class="q-header">
+        <span class="q-badge">QUESTION ${qIdx + 1} OF ${questionPool.length}</span>
+      </div>
+      <div class="q-text">${q.question}</div>
+      <div class="options-list">
     `;
-  });
 
-  html += `</div>`;
-  card.innerHTML = html;
-  area.appendChild(card);
+    q.options.forEach((opt, idx) => {
+      html += `
+        <label class="option-label" data-idx="${idx}">
+          <input type="radio" name="q${qIdx}" value="${idx}">
+          <span class="option-text">${OPTION_LETTERS[idx]}) ${opt}</span>
+        </label>
+      `;
+    });
 
-  const labels = card.querySelectorAll('.option-label');
-  labels.forEach(label => {
-    const radio = label.querySelector('input');
-    radio.addEventListener('change', () => {
-      labels.forEach(l => l.classList.remove('selected'));
-      label.classList.add('selected');
-      selectedAnswers[currentQIndex] = parseInt(radio.value);
-      updateNavButtons();
+    html += `</div>`;
+    card.innerHTML = html;
+    area.appendChild(card);
+
+    const labels = card.querySelectorAll('.option-label');
+    labels.forEach(label => {
+      const radio = label.querySelector('input');
+      radio.addEventListener('change', () => {
+        labels.forEach(l => l.classList.remove('selected'));
+        label.classList.add('selected');
+        selectedAnswers[qIdx] = parseInt(radio.value);
+        updateSubmitButton();
+      });
     });
   });
 
-  updateNavButtons();
-  document.getElementById('q-step').textContent = currentQIndex + 1;
+  updateSubmitButton();
 }
 
-function updateNavButtons() {
-  const nextBtn = document.getElementById('next-q-btn');
+function updateSubmitButton() {
   const submitBtn = document.getElementById('submit-answers-btn');
-
-  const hasAnswer = selectedAnswers[currentQIndex] !== undefined;
-
-  if (currentQIndex === 0) {
-    nextBtn.style.display = 'block';
-    nextBtn.disabled = !hasAnswer;
-    submitBtn.style.display = 'none';
-  } else {
-    nextBtn.style.display = 'none';
-    submitBtn.style.display = 'block';
-    submitBtn.disabled = !hasAnswer;
-  }
+  const allAnswered = questionPool.every((_, idx) => selectedAnswers[idx] !== undefined);
+  submitBtn.disabled = !allAnswered;
 }
-
-document.getElementById('next-q-btn').addEventListener('click', () => {
-  if (currentQIndex < 1) {
-    currentQIndex++;
-    renderCurrentQuestion();
-  }
-});
 
 document.getElementById('submit-answers-btn').addEventListener('click', () => {
   checkVerificationAnswers();
@@ -890,27 +866,27 @@ document.getElementById('submit-answers-btn').addEventListener('click', () => {
 
 function checkVerificationAnswers() {
   const area = document.getElementById('question-area');
-  const navNext = document.getElementById('next-q-btn');
   const navSubmit = document.getElementById('submit-answers-btn');
   const resultDiv = document.getElementById('verify-result');
 
   area.style.display = 'none';
-  navNext.style.display = 'none';
   navSubmit.style.display = 'none';
-  document.getElementById('step-indicator').style.display = 'none';
 
-  const q1Correct = selectedAnswers[0] === currentQuestions[0].correctIndex;
-  const q2Correct = selectedAnswers[1] === currentQuestions[1].correctIndex;
+  const correctCount = questionPool.reduce((count, q, idx) => {
+    return count + (selectedAnswers[idx] === q.correctIndex ? 1 : 0);
+  }, 0);
+  const total = questionPool.length;
+  const passed = correctCount >= PASS_THRESHOLD;
 
   resultDiv.style.display = 'block';
 
-  if (q1Correct && q2Correct) {
+  if (passed) {
     resultDiv.innerHTML = `
       <div class="verify-success-icon">
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00c853" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
       </div>
       <div style="font-family:'Orbitron',sans-serif;font-size:20px;font-weight:800;color:#00c853;letter-spacing:1px;margin-bottom:8px;">VERIFICATION SUCCESSFUL</div>
-      <div style="color:var(--text2);font-size:14px;margin-bottom:22px;">You have correctly answered both questions.<br>Your knowledge of NH MAC rules is verified.</div>
+      <div style="color:var(--text2);font-size:14px;margin-bottom:22px;">You scored ${correctCount} / ${total} — that's above the ${PASS_THRESHOLD} needed.<br>Your knowledge of NH MAC rules is verified.</div>
       <button class="primary-btn" style="max-width:240px;margin:0 auto;" onclick="completeVerification()">CLOSE &amp; CONTINUE</button>
     `;
     isVerified = true;
@@ -920,8 +896,8 @@ function checkVerificationAnswers() {
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ff3b3b" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </div>
       <div style="font-family:'Orbitron',sans-serif;font-size:20px;font-weight:800;color:#ff3b3b;letter-spacing:1px;margin-bottom:8px;">VERIFICATION FAILED</div>
-      <div style="color:var(--text2);font-size:14px;margin-bottom:22px;">One or more answers were incorrect.<br>Please review the rules carefully and try again.</div>
-      <button class="primary-btn" style="max-width:260px;margin:0 auto;background:#ff3b3b;" onclick="retryVerification()">TRY AGAIN WITH NEW QUESTIONS</button>
+      <div style="color:var(--text2);font-size:14px;margin-bottom:22px;">You scored ${correctCount} / ${total} — you need at least ${PASS_THRESHOLD} correct.<br>Please review the rules carefully and try again.</div>
+      <button class="primary-btn" style="max-width:260px;margin:0 auto;background:#ff3b3b;" onclick="retryVerification()">TRY AGAIN</button>
     `;
   }
 }
@@ -1099,3 +1075,4 @@ function escapeHtml(str) {
 </script>
 </body>
 </html>
+
